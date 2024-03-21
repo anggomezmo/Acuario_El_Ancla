@@ -112,5 +112,38 @@ function gestionarUsuarios(opcion){
     }while(true)
 }
 
+function gestionarProductos(opcion){
+    let opcionEntidad
+    do{
+        opcionEntidad = Number(prompt("--------------Productos--------------\n\n" +
+        "Ingrese la opción que desee realizar:\n" +
+        "1. Añadir Producto\n" + "2. Eliminar Producto\n" + "3. Editar Producto\n" +
+        "4. Mostrar Productos\n" + "5. Volver al menú principal\n\n" + "Ingrese el NÚMERO de la opción que desea elegir."))
 
+    switch(opcionEntidad){
+        case 1:
+            añadir(opcion)
+            break;
+        case 2:
+            eliminar(opcion)
+            break;
+        case 3:
+            editar(opcion)
+            break;
+        case 4:
+            mostrar(opcion)
+            break;
+        case 5:
+            console.log('Saliendo al menü principal...')
+            return;
+        default:
+            console.log('Por favor elija una opción valida')
+            break;
+
+        
+        
+
+    }
+    }while(true)
+}
 
