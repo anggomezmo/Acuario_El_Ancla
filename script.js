@@ -63,7 +63,7 @@ function gestionarProveedores(opcion){
             mostrar(opcion)
             break;
         case 5:
-            console.log('Saliendo al menü principal...')
+            console.log('Saliendo al menú principal...')
             return;
         default:
             console.log('Por favor elija una opción valida')
@@ -134,7 +134,7 @@ function gestionarProductos(opcion){
             mostrar(opcion)
             break;
         case 5:
-            console.log('Saliendo al menü principal...')
+            console.log('Saliendo al menú principal...')
             return;
         default:
             console.log('Por favor elija una opción valida')
@@ -167,7 +167,7 @@ function gestionarVentas(opcion){
                 mostrar(opcion)
                 break;
             case 4:
-                console.log('Saliendo al menü principal...')
+                console.log('Saliendo al menú principal...')
                 return;
             default:
                 console.log('Por favor elija una opción valida')
@@ -196,12 +196,46 @@ function gestionarCompras(opcion){
                 mostrar(opcion)
                 break;
             case 4:
-                console.log('Saliendo al menü principal...')
+                console.log('Saliendo al menú principal...')
                 return;
             default:
                 console.log('Por favor elija una opción valida')
                 break;
 
         }
+    } while (true);
+}
+
+function gestionarRoles(opcion){
+    let opcionEntidad
+    do {
+        opcionEntidad = Number(prompt("--------------Roles--------------\n\n" +
+        "Ingrese la opción que desee realizar:\n" +
+        "1. Añadir Rol\n" + "2. Editar Rol\n" + "3. Eliminar Rol\n" +
+        "4. Mostrar Roles\n" + "5. Volver al menú principal\n\n" +
+         "Ingrese el NÚMERO de la opción que desea elegir."));
+
+         switch(opcionEntidad){
+            case 1:
+                añadir(opcion)
+                break;
+            case 2:
+                editar(opcion)
+                break;
+            case 3:
+                eliminar(opcion)
+                break;
+            case 4: 
+                mostrar(opcion)
+                break;
+            case 5:
+                console.log('Saliendo al menú principal...')
+                return;
+            default:
+                console.log('Por favor elija una opción valida')
+                break;
+
+
+         }
     } while (true);
 }
