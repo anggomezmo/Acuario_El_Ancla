@@ -176,3 +176,32 @@ function gestionarVentas(opcion){
         }
     }while(true)
 }
+
+function gestionarCompras(opcion){
+    let opcionEntidad
+    do {
+        opcionEntidad = Number(prompt("--------------Compras--------------\n\n" +
+        "Ingrese la opción que desee realizar:\n" +
+        "1. Registrar Compra\n" + "2. Editar Compras\n" + "3. Mostrar Compras\n" +
+        "4. Volver al menú principal\n\n" + "Ingrese el NÚMERO de la opción que desea elegir."))
+        
+        switch(opcionEntidad){
+            case 1:
+                añadir(opcion)
+                break;
+            case 2:
+                editar(opcion)
+                break;
+            case 3:
+                mostrar(opcion)
+                break;
+            case 4:
+                console.log('Saliendo al menü principal...')
+                return;
+            default:
+                console.log('Por favor elija una opción valida')
+                break;
+
+        }
+    } while (true);
+}
