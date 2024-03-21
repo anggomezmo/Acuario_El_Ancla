@@ -19,24 +19,31 @@ function mostrarMenuPrincipal() {
 
         switch (opcion) {
             case 1:
+                console.log('Entrando a proveedores...')
                 gestionarProveedores();
                 break;
             case 2:
+                console.log('Entrando a usuarios...')
                 gestionarUsuarios();
                 break;
             case 3:
+                console.log('Entrando a productos...')
                 gestionarProductos();
                 break;
             case 4:
+                console.log('Entrando a ventas...')
                 gestionarVentas();
                 break;
-            case 5: 1
+            case 5:
+                console.log('Entrando a compras...')
                 gestionarCompras();
                 break;
             case 6:
+                console.log('Entrando a roles...')
                 gestionarRoles();
                 break;
             case 7:
+
                 console.log("Saliendo del programa...");
                 break; // Finaliza el programa
             default:
@@ -288,101 +295,156 @@ function añadir(entidad) {
             usuariosLista.push(nuevoUsuario);
             console.log("Usuario añadido correctamente:");
             return;
-        
+
         case 3:
             let id_producto = prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese el ID del producto:");
-          let nombre_producto = prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese el nombre del producto:");
-          let descripcion_producto = prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese la descripción del producto:");
-          let tipo_producto = prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese el tipo del producto:");
-          let precio_producto = parseFloat(prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese el precio del producto:"));
-          let unidades_disponibles = parseInt(prompt("--------------Añadir Productos--------------\n\n" +
-            "Por favor ingrese las unidades disponibles del producto:"));
-    
-          let nuevoProducto = new Producto(id_producto, nombre_producto, descripcion_producto,
-            tipo_producto, precio_producto, unidades_disponibles);
-    
-          productosLista.push(nuevoProducto);
-          console.log("Producto añadido correctamente:");
-          return;
+                "Por favor ingrese el ID del producto:");
+            let nombre_producto = prompt("--------------Añadir Productos--------------\n\n" +
+                "Por favor ingrese el nombre del producto:");
+            let descripcion_producto = prompt("--------------Añadir Productos--------------\n\n" +
+                "Por favor ingrese la descripción del producto:");
+            let tipo_producto = prompt("--------------Añadir Productos--------------\n\n" +
+                "Por favor ingrese el tipo del producto:");
+            let precio_producto = parseFloat(prompt("--------------Añadir Productos--------------\n\n" +
+                "Por favor ingrese el precio del producto:"));
+            let unidades_disponibles = parseInt(prompt("--------------Añadir Productos--------------\n\n" +
+                "Por favor ingrese las unidades disponibles del producto:"));
 
-          case 4:
+            let nuevoProducto = new Producto(id_producto, nombre_producto, descripcion_producto,
+                tipo_producto, precio_producto, unidades_disponibles);
+
+            productosLista.push(nuevoProducto);
+            console.log("Producto añadido correctamente:");
+            return;
+
+        case 4:
             let id_venta = prompt("--------------Registrar Venta--------------\n\n" +
-        "Por favor ingrese el ID de la venta:");
-      let fecha_hora_compra = prompt("--------------Registrar Venta--------------\n\n" +
-        "Por favor ingrese la fecha y hora de la compra:");
-      let id_cliente = prompt("--------------Registrar Venta--------------\n\n" +
-        "Por favor ingrese el ID del cliente:");
-      let total_venta = parseFloat(prompt("--------------Registrar Venta--------------\n\n" +
-        "Por favor ingrese el total de la venta:"));
-      let metodo_pago_venta = prompt("--------------Registrar Venta--------------\n\n" +
-        "Por favor ingrese el método de pago de la venta:");
+                "Por favor ingrese el ID de la venta:");
+            let fecha_hora_compra = prompt("--------------Registrar Venta--------------\n\n" +
+                "Por favor ingrese la fecha y hora de la compra:");
+            let id_cliente = prompt("--------------Registrar Venta--------------\n\n" +
+                "Por favor ingrese el ID del cliente:");
+            let total_venta = parseFloat(prompt("--------------Registrar Venta--------------\n\n" +
+                "Por favor ingrese el total de la venta:"));
+            let metodo_pago_venta = prompt("--------------Registrar Venta--------------\n\n" +
+                "Por favor ingrese el método de pago de la venta:");
 
-      let nuevaVenta = new Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta);
+            let nuevaVenta = new Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta);
 
-      ventasLista.push(nuevaVenta);
-      console.log("Venta registrada correctamente:");
-      return;
+            ventasLista.push(nuevaVenta);
+            console.log("Venta registrada correctamente:");
+            return;
+
+        case 5:
+
+            let id_compra = prompt("--------------Registrar Compra--------------\n\n" +
+                "Por favor ingrese el ID de la compra:");
+            let metodo_pago_compra = prompt("--------------Registrar Compra--------------\n\n" +
+                "Por favor ingrese el método de pago de la compra:");
+            let total_compra = parseFloat(prompt("--------------Registrar Compra--------------\n\n" +
+                "Por favor ingrese el total de la compra:"));
+            let productos_comprados = prompt("--------------Registrar Compra--------------\n\n" +
+                "Por favor ingrese los productos comprados:");
+
+            let nuevaCompra = new Compra(id_compra, metodo_pago_compra, total_compra, productos_comprados);
+
+            comprasLista.push(nuevaCompra);
+            console.log("Compra registrada correctamente:");
+            return;
+
+        case 6:
+            let id_roles = prompt("--------------Añadir Rol--------------\n\n" +
+                "Por favor ingrese el ID del rol:");
+            let nombre_roles = prompt("--------------Añadir Rol--------------\n\n" +
+                "Por favor ingrese el nombre del rol:");
+
+            let nuevoRol = new Rol(id_roles, nombre_roles);
+
+            rolesLista.push(nuevoRol);
+            console.log("Rol añadido correctamente:");
+            return;
+
     }
-    
-
 
 }
 
+function eliminar(entidad) {
+    switch (entidad) {
+        case 1:
+            if (proveedoresLista.length === 0) {
+                console.log('No tiene ningún proveedor agregado, por favor añada un proveedor primero')
+                return;
+                
+            } else {
+                console.log('Estos son los proveedores que actualmente están registrados:\n ')
+                console.table(proveedoresLista)
+            }
 
+            let opcionEliminar = Number(prompt('--------------Eliminar Proveedor--------------\n\n' +
+                'Ingrese el índice del proveedor que desea eliminar'))
 
-// Constructores
-function Proveedor(id_tributario, nombre_proveedor, direccion_proveedor,
-    telefono_proveedor, correo_proveedor, categoria_productos) {
-    this.id_tributario = id_tributario;
-    this.nombre_proveedor = nombre_proveedor;
-    this.direccion_proveedor = direccion_proveedor;
-    this.telefono_proveedor = telefono_proveedor;
-    this.correo_proveedor = correo_proveedor;
-    this.categoria_productos = categoria_productos;
+            if (!Number.isInteger(opcionEliminar) || opcionEliminar < 0 || opcionEliminar >= proveedoresLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo')
+                eliminar(1)
+                return;
+            } else {
+                proveedoresLista.splice(opcionEliminar, 1)
+                console.log('Proveedor eliminado correctamente')
+                return;
+            }
+            
 
+    }
 }
 
-function Usuario(documento_usuario, tipo_documento_usuario, nombre_usuario,
-    apellido_usuario, correo_usuario, rol_usuario) {
-    this.tipo_documento_usuario = tipo_documento_usuario;
-    this.documento_usuario = documento_usuario;
-    this.nombre_usuario = nombre_usuario;
-    this.apellido_usuario = apellido_usuario;
-    this.correo_usuario = correo_usuario;
-    this.rol_usuario = rol_usuario;
-}
+    // Constructores
+    function Proveedor(id_tributario, nombre_proveedor, direccion_proveedor,
+        telefono_proveedor, correo_proveedor, categoria_productos) {
+        this.id_tributario = id_tributario;
+        this.nombre_proveedor = nombre_proveedor;
+        this.direccion_proveedor = direccion_proveedor;
+        this.telefono_proveedor = telefono_proveedor;
+        this.correo_proveedor = correo_proveedor;
+        this.categoria_productos = categoria_productos;
 
-function Producto(id_producto, nombre_producto, descripcion_producto, tipo_producto, precio_producto,
-    unidades_disponibles) {
-    this.id_producto = id_producto;
-    this.nombre_producto = nombre_producto;
-    this.descripcion_producto = descripcion_producto;
-    this.tipo_producto = tipo_producto;
-    this.precio_producto = precio_producto;
-    this.unidades_disponibles = unidades_disponibles;
-}
+    }
 
-function Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta) {
-    this.id_venta = id_venta;
-    this.fecha_hora_compra = fecha_hora_compra;
-    this.id_cliente = id_cliente;
-    this.total_venta = total_venta;
-    this.metodo_pago_venta = metodo_pago_venta;
-}
+    function Usuario(documento_usuario, tipo_documento_usuario, nombre_usuario,
+        apellido_usuario, correo_usuario, rol_usuario) {
+        this.tipo_documento_usuario = tipo_documento_usuario;
+        this.documento_usuario = documento_usuario;
+        this.nombre_usuario = nombre_usuario;
+        this.apellido_usuario = apellido_usuario;
+        this.correo_usuario = correo_usuario;
+        this.rol_usuario = rol_usuario;
+    }
 
-function Compra(id_compra, metodo_pago_compra, total_compra, productos_comprados) {
-    this.id_compra = id_compra;
-    this.metodo_pago_compra = metodo_pago_compra;
-    this.total_compra = total_compra;
-    this.productos_comprados = productos_comprados;
-}
+    function Producto(id_producto, nombre_producto, descripcion_producto, tipo_producto, precio_producto,
+        unidades_disponibles) {
+        this.id_producto = id_producto;
+        this.nombre_producto = nombre_producto;
+        this.descripcion_producto = descripcion_producto;
+        this.tipo_producto = tipo_producto;
+        this.precio_producto = precio_producto;
+        this.unidades_disponibles = unidades_disponibles;
+    }
 
-function Rol(id_roles, nombre_roles) {
-    this.id_roles = id_roles;
-    this.nombre_roles = nombre_roles;
-} 
+    function Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta) {
+        this.id_venta = id_venta;
+        this.fecha_hora_compra = fecha_hora_compra;
+        this.id_cliente = id_cliente;
+        this.total_venta = total_venta;
+        this.metodo_pago_venta = metodo_pago_venta;
+    }
+
+    function Compra(id_compra, metodo_pago_compra, total_compra, productos_comprados) {
+        this.id_compra = id_compra;
+        this.metodo_pago_compra = metodo_pago_compra;
+        this.total_compra = total_compra;
+        this.productos_comprados = productos_comprados;
+    }
+
+    function Rol(id_roles, nombre_roles) {
+        this.id_roles = id_roles;
+        this.nombre_roles = nombre_roles;
+    } 
