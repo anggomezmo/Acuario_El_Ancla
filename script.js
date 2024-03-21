@@ -374,7 +374,7 @@ function eliminar(entidad) {
             if (proveedoresLista.length === 0) {
                 console.log('No tiene ningún proveedor agregado, por favor añada un proveedor primero')
                 return;
-                
+
             } else {
                 console.log('Estos son los proveedores que actualmente están registrados:\n ')
                 console.table(proveedoresLista)
@@ -392,59 +392,175 @@ function eliminar(entidad) {
                 console.log('Proveedor eliminado correctamente')
                 return;
             }
+        case 2:
+            if (usuariosLista.length == 0) {
+                console.log('No tiene ningún usuario agregado, por favor añada un usuario primero')
+                return;
+            }
+            else {
+                console.log('Estos son los usuarios que actualmente están registrados:\n ')
+                console.table(usuariosLista)
+            }
+
+            let opcionEliminarUsuario = Number(prompt('--------------Eliminar Usuario--------------\n\n' +
+                'Ingrese el índice del usuario que desea eliminar'))
+            if (!Number.isInteger(opcionEliminarUsuario) || opcionEliminarUsuario < 0 || opcionEliminarUsuario >= usuariosLista.length) {
+                console.log('Índice inválido, por favor inténtelo de nuevo')
+                eliminar(2)
+            }
+            else {
+                usuariosLista.splice(opcionEliminarUsuario, 1)
+                console.log('Usuario eliminado correctamente')
+                return;
+            }
+        case 3:
+            if (productosLista.length == 0) {
+                console.log('No tiene ningún producto agregado, por favor añada un producto primero')
+                return;
+
+            }
+            else {
+                console.log('Estos son los productos que actualmente están registrados:\n ')
+                console.table(productosLista)
+            }
+
+            let opcionEliminarProducto = Number(prompt('--------------Eliminar Producto--------------\n\n' +
+                'Ingrese el índice del producto que desea eliminar'))
+            if (!Number.isInteger(opcionEliminarProducto) || opcionEliminarProducto < 0 || opcionEliminarProducto >= productosLista.length) {
+                console.log('Índice inválido, por favor inténtelo de nuevo')
+                eliminar(3)
+            }
+            else {
+                productosLista.splice(opcionEliminarProducto, 1)
+                console.log('Producto eliminado correctamente')
+                return
+            }
+        case 4:
+            if (ventasLista.length == 0) {
+                console.log('No tiene ninguna venta registrada')
+                return
+
+            }
+            else {
+                console.log('Estas son las ventas que actualmente están registradas:\n ')
+                console.table(ventasLista)
+            }
+
+            let opcionEliminarVenta = Number(prompt('--------------Eliminar Venta--------------\n\n' +
+                'Ingrese el índice de la venta que desea eliminar'))
+            if (!Number.isInteger(opcionEliminarVenta) || opcionEliminarVenta < 0 || opcionEliminarVenta >= ventasLista.length) {
+                console.log('Índice inválido, por favor inténtelo de nuevo')
+                eliminar(4)
+            }
+            else {
+                ventasLista.splice(opcionEliminarVenta, 1)
+                console.log('Venta eliminada correctamente')
+                return
+            }
+        case 5:
+            if (comprasLista.length == 0) {
+                console.log('No tiene ninguna compra registrada')
+                return
+            }
+            else {
+            console.log('Estas son las compras que actualmente están registradas:\n ')
+          console.table(comprasLista)
+        }
+      
+        let opcionEliminarCompra = Number(prompt('--------------Eliminar Compra--------------\n\n' +
+          'Ingrese el índice de la compra que desea eliminar'))
+        if (!Number.isInteger(opcionEliminarCompra) || opcionEliminarCompra < 0 || opcionEliminarCompra >= comprasLista.length) {
+          console.log('Índice inválido, por favor inténtelo de nuevo')
+          eliminar(5)
+        }
+        else {
+          comprasLista.splice(opcionEliminarCompra, 1)
+          console.log('Compra eliminada correctamente')
+         return
+        }
+
+        case 6:
             
+            if (rolesLista.length == 0) {
+                console.log('No tiene ningún rol agregado, por favor añada un rol primero')
+                return
+            }
+            else {
+                console.log('Estos son los roles que actualmente están registrados:\n ')
+              console.table(rolesLista)
+            }
+          
+            let opcionEliminarRol = Number(prompt('--------------Eliminar Rol--------------\n\n' +
+              'Ingrese el índice del rol que desea eliminar'))
+            if (!Number.isInteger(opcionEliminarRol) || opcionEliminarRol < 0 || opcionEliminarRol >= rolesLista.length) {
+              console.log('Índice inválido, por favor inténtelo de nuevo')
+              eliminar(6)
+            }
+            else {
+              rolesLista.splice(opcionEliminarRol, 1)
+              console.log('Rol eliminado correctamente')
+              return
+            }
+
+
+
+
+
 
     }
+
+
+
 }
 
-    // Constructores
-    function Proveedor(id_tributario, nombre_proveedor, direccion_proveedor,
-        telefono_proveedor, correo_proveedor, categoria_productos) {
-        this.id_tributario = id_tributario;
-        this.nombre_proveedor = nombre_proveedor;
-        this.direccion_proveedor = direccion_proveedor;
-        this.telefono_proveedor = telefono_proveedor;
-        this.correo_proveedor = correo_proveedor;
-        this.categoria_productos = categoria_productos;
+// Constructores
+function Proveedor(id_tributario, nombre_proveedor, direccion_proveedor,
+    telefono_proveedor, correo_proveedor, categoria_productos) {
+    this.id_tributario = id_tributario;
+    this.nombre_proveedor = nombre_proveedor;
+    this.direccion_proveedor = direccion_proveedor;
+    this.telefono_proveedor = telefono_proveedor;
+    this.correo_proveedor = correo_proveedor;
+    this.categoria_productos = categoria_productos;
 
-    }
+}
 
-    function Usuario(documento_usuario, tipo_documento_usuario, nombre_usuario,
-        apellido_usuario, correo_usuario, rol_usuario) {
-        this.tipo_documento_usuario = tipo_documento_usuario;
-        this.documento_usuario = documento_usuario;
-        this.nombre_usuario = nombre_usuario;
-        this.apellido_usuario = apellido_usuario;
-        this.correo_usuario = correo_usuario;
-        this.rol_usuario = rol_usuario;
-    }
+function Usuario(documento_usuario, tipo_documento_usuario, nombre_usuario,
+    apellido_usuario, correo_usuario, rol_usuario) {
+    this.tipo_documento_usuario = tipo_documento_usuario;
+    this.documento_usuario = documento_usuario;
+    this.nombre_usuario = nombre_usuario;
+    this.apellido_usuario = apellido_usuario;
+    this.correo_usuario = correo_usuario;
+    this.rol_usuario = rol_usuario;
+}
 
-    function Producto(id_producto, nombre_producto, descripcion_producto, tipo_producto, precio_producto,
-        unidades_disponibles) {
-        this.id_producto = id_producto;
-        this.nombre_producto = nombre_producto;
-        this.descripcion_producto = descripcion_producto;
-        this.tipo_producto = tipo_producto;
-        this.precio_producto = precio_producto;
-        this.unidades_disponibles = unidades_disponibles;
-    }
+function Producto(id_producto, nombre_producto, descripcion_producto, tipo_producto, precio_producto,
+    unidades_disponibles) {
+    this.id_producto = id_producto;
+    this.nombre_producto = nombre_producto;
+    this.descripcion_producto = descripcion_producto;
+    this.tipo_producto = tipo_producto;
+    this.precio_producto = precio_producto;
+    this.unidades_disponibles = unidades_disponibles;
+}
 
-    function Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta) {
-        this.id_venta = id_venta;
-        this.fecha_hora_compra = fecha_hora_compra;
-        this.id_cliente = id_cliente;
-        this.total_venta = total_venta;
-        this.metodo_pago_venta = metodo_pago_venta;
-    }
+function Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta) {
+    this.id_venta = id_venta;
+    this.fecha_hora_compra = fecha_hora_compra;
+    this.id_cliente = id_cliente;
+    this.total_venta = total_venta;
+    this.metodo_pago_venta = metodo_pago_venta;
+}
 
-    function Compra(id_compra, metodo_pago_compra, total_compra, productos_comprados) {
-        this.id_compra = id_compra;
-        this.metodo_pago_compra = metodo_pago_compra;
-        this.total_compra = total_compra;
-        this.productos_comprados = productos_comprados;
-    }
+function Compra(id_compra, metodo_pago_compra, total_compra, productos_comprados) {
+    this.id_compra = id_compra;
+    this.metodo_pago_compra = metodo_pago_compra;
+    this.total_compra = total_compra;
+    this.productos_comprados = productos_comprados;
+}
 
-    function Rol(id_roles, nombre_roles) {
-        this.id_roles = id_roles;
-        this.nombre_roles = nombre_roles;
-    } 
+function Rol(id_roles, nombre_roles) {
+    this.id_roles = id_roles;
+    this.nombre_roles = nombre_roles;
+} 
