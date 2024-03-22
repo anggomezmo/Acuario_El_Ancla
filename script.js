@@ -407,6 +407,7 @@ function eliminar(entidad) {
             if (!Number.isInteger(opcionEliminarUsuario) || opcionEliminarUsuario < 0 || opcionEliminarUsuario >= usuariosLista.length) {
                 console.log('Índice inválido, por favor inténtelo de nuevo')
                 eliminar(2)
+                return
             }
             else {
                 usuariosLista.splice(opcionEliminarUsuario, 1)
@@ -429,6 +430,7 @@ function eliminar(entidad) {
             if (!Number.isInteger(opcionEliminarProducto) || opcionEliminarProducto < 0 || opcionEliminarProducto >= productosLista.length) {
                 console.log('Índice inválido, por favor inténtelo de nuevo')
                 eliminar(3)
+                return
             }
             else {
                 productosLista.splice(opcionEliminarProducto, 1)
@@ -451,6 +453,7 @@ function eliminar(entidad) {
             if (!Number.isInteger(opcionEliminarVenta) || opcionEliminarVenta < 0 || opcionEliminarVenta >= ventasLista.length) {
                 console.log('Índice inválido, por favor inténtelo de nuevo')
                 eliminar(4)
+                return
             }
             else {
                 ventasLista.splice(opcionEliminarVenta, 1)
@@ -463,43 +466,44 @@ function eliminar(entidad) {
                 return
             }
             else {
-            console.log('Estas son las compras que actualmente están registradas:\n ')
-          console.table(comprasLista)
-        }
-      
-        let opcionEliminarCompra = Number(prompt('--------------Eliminar Compra--------------\n\n' +
-          'Ingrese el índice de la compra que desea eliminar'))
-        if (!Number.isInteger(opcionEliminarCompra) || opcionEliminarCompra < 0 || opcionEliminarCompra >= comprasLista.length) {
-          console.log('Índice inválido, por favor inténtelo de nuevo')
-          eliminar(5)
-        }
-        else {
-          comprasLista.splice(opcionEliminarCompra, 1)
-          console.log('Compra eliminada correctamente')
-         return
-        }
+                console.log('Estas son las compras que actualmente están registradas:\n ')
+                console.table(comprasLista)
+            }
+
+            let opcionEliminarCompra = Number(prompt('--------------Eliminar Compra--------------\n\n' +
+                'Ingrese el índice de la compra que desea eliminar'))
+            if (!Number.isInteger(opcionEliminarCompra) || opcionEliminarCompra < 0 || opcionEliminarCompra >= comprasLista.length) {
+                console.log('Índice inválido, por favor inténtelo de nuevo')
+                eliminar(5)
+                return
+            }
+            else {
+                comprasLista.splice(opcionEliminarCompra, 1)
+                console.log('Compra eliminada correctamente')
+                return
+            }
 
         case 6:
-            
+
             if (rolesLista.length == 0) {
                 console.log('No tiene ningún rol agregado, por favor añada un rol primero')
                 return
             }
             else {
                 console.log('Estos son los roles que actualmente están registrados:\n ')
-              console.table(rolesLista)
+                console.table(rolesLista)
             }
-          
+
             let opcionEliminarRol = Number(prompt('--------------Eliminar Rol--------------\n\n' +
-              'Ingrese el índice del rol que desea eliminar'))
+                'Ingrese el índice del rol que desea eliminar'))
             if (!Number.isInteger(opcionEliminarRol) || opcionEliminarRol < 0 || opcionEliminarRol >= rolesLista.length) {
-              console.log('Índice inválido, por favor inténtelo de nuevo')
-              eliminar(6)
+                console.log('Índice inválido, por favor inténtelo de nuevo')
+                eliminar(6)
             }
             else {
-              rolesLista.splice(opcionEliminarRol, 1)
-              console.log('Rol eliminado correctamente')
-              return
+                rolesLista.splice(opcionEliminarRol, 1)
+                console.log('Rol eliminado correctamente')
+                return
             }
 
 
@@ -511,6 +515,300 @@ function eliminar(entidad) {
 
 
 
+}
+
+function editar(entidad) {
+    switch (entidad) {
+        case 1:
+            if (proveedoresLista.length === 0) {
+                console.log('No tiene ningún proveedor agregado, por favor añada un proveedor primero');
+                return;
+            } else {
+                console.log('Estos son los proveedores que actualmente están registrados:\n ');
+                console.table(proveedoresLista);
+            }
+
+            let opcionEditar = Number(prompt('--------------Editar Proveedor--------------\n\n' +
+                'Ingrese el índice del proveedor que desea editar'));
+
+            if (!Number.isInteger(opcionEditar) || opcionEditar < 0 || opcionEditar >= proveedoresLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(1);
+                return;
+            } else {
+                let proveedor = proveedoresLista[opcionEditar];
+                console.log('Proveedor seleccionado:\n');
+                console.table([proveedor]);
+
+                // Solicitar los nuevos datos del proveedor
+                let id_tributario = prompt('Ingrese el nuevo ID tributario del proveedor:');
+                let nombre_proveedor = prompt('Ingrese el nuevo nombre del proveedor:');
+                let direccion_proveedor = prompt('Ingrese la nueva dirección del proveedor:');
+                let telefono_proveedor = prompt('Ingrese el nuevo teléfono del proveedor:');
+                let correo_proveedor = prompt('Ingrese el nuevo correo del proveedor:');
+                let categoria_productos = prompt('Ingrese la nueva categoría de productos del proveedor:');
+
+                // Actualizar los datos del proveedor
+                proveedor.id_tributario = id_tributario;
+                proveedor.nombre_proveedor = nombre_proveedor;
+                proveedor.direccion_proveedor = direccion_proveedor;
+                proveedor.telefono_proveedor = telefono_proveedor;
+                proveedor.correo_proveedor = correo_proveedor;
+                proveedor.categoria_productos = categoria_productos;
+
+                console.log('Proveedor editado correctamente');
+                return;
+            }
+
+        case 2: // Usuarios
+            if (usuariosLista.length === 0) {
+                console.log('No tiene ningún usuario agregado, por favor añada un usuario primero');
+                return;
+            } else {
+                console.log('Estos son los usuarios que actualmente están registrados:\n ');
+                console.table(usuariosLista);
+            }
+
+            let opcionEditarUsuario = Number(prompt('--------------Editar Usuario--------------\n\n' +
+                'Ingrese el índice del usuario que desea editar'));
+
+            if (!Number.isInteger(opcionEditarUsuario) || opcionEditarUsuario < 0 || opcionEditarUsuario >= usuariosLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(2);
+                return;
+            } else {
+                let usuario = usuariosLista[opcionEditarUsuario];
+                console.log('Usuario seleccionado:\n');
+                console.table([usuario]);
+
+                // Solicitar los nuevos datos del usuario
+                let documento_usuario = prompt('Ingrese el nuevo documento del usuario:');
+                let tipo_documento_usuario = prompt('Ingrese el nuevo tipo de documento del usuario:');
+                let nombre_usuario = prompt('Ingrese el nuevo nombre del usuario:');
+                let apellido_usuario = prompt('Ingrese el nuevo apellido del usuario:');
+                let correo_usuario = prompt('Ingrese el nuevo correo del usuario:');
+                let rol_usuario = prompt('Ingrese el nuevo rol del usuario:');
+
+                // Actualizar los datos del usuario
+                usuario.documento_usuario = documento_usuario;
+                usuario.tipo_documento_usuario = tipo_documento_usuario;
+                usuario.nombre_usuario = nombre_usuario;
+                usuario.apellido_usuario = apellido_usuario;
+                usuario.correo_usuario = correo_usuario;
+                usuario.rol_usuario = rol_usuario;
+
+                console.log('Usuario editado correctamente');
+                return;
+
+            }
+        case 3: // Productos
+            if (productosLista.length === 0) {
+                console.log('No tiene ningún producto agregado, por favor añada un producto primero');
+                return;
+            } else {
+                console.log('Estos son los productos que actualmente están registrados:\n ');
+                console.table(productosLista);
+            }
+
+            let opcionEditarProducto = Number(prompt('--------------Editar Producto--------------\n\n' +
+                'Ingrese el índice del producto que desea editar'));
+
+            if (!Number.isInteger(opcionEditarProducto) || opcionEditarProducto < 0 || opcionEditarProducto >= productosLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(3);
+                return;
+            } else {
+                let producto = productosLista[opcionEditarProducto];
+                console.log('Producto seleccionado:\n');
+                console.table([producto]);
+
+                // Solicitar los nuevos datos del producto
+                let id_producto = prompt('Ingrese el nuevo ID del producto:');
+                let nombre_producto = prompt('Ingrese el nuevo nombre del producto:');
+                let descripcion_producto = prompt('Ingrese la nueva descripción del producto:');
+                let tipo_producto = prompt('Ingrese el nuevo tipo de producto:');
+                let precio_producto = prompt('Ingrese el nuevo precio del producto:');
+                let unidades_disponibles = prompt('Ingrese las nuevas unidades disponibles del producto:');
+
+                // Actualizar los datos del producto
+                producto.id_producto = id_producto;
+                producto.nombre_producto = nombre_producto;
+                producto.descripcion_producto = descripcion_producto;
+                producto.tipo_producto = tipo_producto;
+                producto.precio_producto = precio_producto;
+                producto.unidades_disponibles = unidades_disponibles;
+
+                console.log('Producto editado correctamente');
+                return;
+            }
+        case 4:
+
+            if (ventasLista.length === 0) {
+                console.log('No tiene ninguna venta registrada, por favor registre una venta primero');
+                return;
+            } else {
+                console.log('Estas son las ventas actualmente registradas:\n ');
+                console.table(ventasLista);
+            }
+
+            let opcionEditarVenta = Number(prompt('--------------Editar Venta--------------\n\n' +
+                'Ingrese el índice de la venta que desea editar'));
+
+            if (!Number.isInteger(opcionEditarVenta) || opcionEditarVenta < 0 || opcionEditarVenta >= ventasLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(4); // 4 porque es el caso de editar ventas
+                return;
+            } else {
+                let venta = ventasLista[opcionEditarVenta];
+                console.log('Venta seleccionada:\n');
+                console.table([venta]);
+
+                // Solicitar los nuevos datos de la venta
+                let id_venta = prompt('Ingrese el nuevo ID de la venta:');
+                let fecha_hora_compra = prompt('Ingrese la nueva fecha y hora de la compra:');
+                let id_cliente = prompt('Ingrese el nuevo ID del cliente:');
+                let total_venta = prompt('Ingrese el nuevo total de la venta:');
+                let metodo_pago_venta = prompt('Ingrese el nuevo método de pago de la venta:');
+
+                // Actualizar los datos de la venta
+                venta.id_venta = id_venta;
+                venta.fecha_hora_compra = fecha_hora_compra;
+                venta.id_cliente = id_cliente;
+                venta.total_venta = total_venta;
+                venta.metodo_pago_venta = metodo_pago_venta;
+
+                console.log('Venta editada correctamente');
+                return;
+            }
+        case 5:
+            if (comprasLista.length === 0) {
+                console.log('No tiene ninguna compra registrada, por favor registre una compra primero');
+                return;
+            } else {
+                console.log('Estas son las compras actualmente registradas:\n ');
+                console.table(comprasLista);
+            }
+
+            let opcionEditarCompra = Number(prompt('--------------Editar Compra--------------\n\n' +
+                'Ingrese el índice de la compra que desea editar'));
+
+            if (!Number.isInteger(opcionEditarCompra) || opcionEditarCompra < 0 || opcionEditarCompra >= comprasLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(5); // 5 porque es el caso de editar compras
+                return;
+            } else {
+                let compra = comprasLista[opcionEditarCompra];
+                console.log('Compra seleccionada:\n');
+                console.table([compra]);
+
+                // Solicitar los nuevos datos de la compra
+                let id_compra = prompt('Ingrese el nuevo ID de la compra:');
+                let metodo_pago_compra = prompt('Ingrese el nuevo método de pago de la compra:');
+                let total_compra = prompt('Ingrese el nuevo total de la compra:');
+                let productos_comprados = prompt('Ingrese los nuevos productos comprados:');
+
+                // Actualizar los datos de la compra
+                compra.id_compra = id_compra;
+                compra.metodo_pago_compra = metodo_pago_compra;
+                compra.total_compra = total_compra;
+                compra.productos_comprados = productos_comprados;
+
+                console.log('Compra editada correctamente');
+                return;
+            }
+        case 6:
+            if (rolesLista.length === 0) {
+                console.log('No tiene ningún rol registrado, por favor registre un rol primero');
+                return;
+            } else {
+                console.log('Estos son los roles actualmente registrados:\n ');
+                console.table(rolesLista);
+            }
+
+            let opcionEditarRol = Number(prompt('--------------Editar Rol--------------\n\n' +
+                'Ingrese el índice del rol que desea editar'));
+
+            if (!Number.isInteger(opcionEditarRol) || opcionEditarRol < 0 || opcionEditarRol >= rolesLista.length) {
+                console.log('Índice inválido, por favor intente de nuevo');
+                editar(6); // 6 porque es el caso de editar roles
+                return;
+            } else {
+                let rol = rolesLista[opcionEditarRol];
+                console.log('Rol seleccionado:\n');
+                console.table([rol]);
+
+                // Solicitar los nuevos datos del rol
+                let id_roles = prompt('Ingrese el nuevo ID del rol:');
+                let nombre_roles = prompt('Ingrese el nuevo nombre del rol:');
+
+                // Actualizar los datos del rol
+                rol.id_roles = id_roles;
+                rol.nombre_roles = nombre_roles;
+
+                console.log('Rol editado correctamente');
+                return;
+            }
+
+    }
+}
+
+function mostrar(entidad) {
+    switch (entidad) {
+        case 1: // Proveedores
+            if (proveedoresLista.length === 0) {
+                console.log('No tiene ningún proveedor agregado, por favor añada un proveedor primero');
+                return
+            } else {
+                console.log('Estos son los proveedores que actualmente están registrados:\n\n ');
+                console.table(proveedoresLista);
+                return
+            }
+        case 2: // Usuarios
+            if (usuariosLista.length === 0) {
+                console.log('No tiene ningún usuario agregado, por favor añada un usuario primero');
+                return;
+            } else {
+                console.log('Estos son los usuarios que actualmente están registrados:\n\n ');
+                console.table(usuariosLista);
+                return;
+            }
+        case 3: // Productos
+            if (productosLista.length === 0) {
+                console.log('No tiene ningún producto agregado, por favor añada un producto primero');
+                return;
+            } else {
+                console.log('Estos son los productos que actualmente están registrados:\n\n ');
+                console.table(productosLista);
+                return;
+            }
+        case 4: // Ventas
+            if (ventasLista.length === 0) {
+                console.log('No tiene ninguna venta registrada, por favor registre una venta primero');
+                return;
+            } else {
+                console.log('Estas son las ventas que actualmente están registradas:\n\n ');
+                console.table(ventasLista);
+                return;
+            }
+        case 5: // Compras
+            if (comprasLista.length === 0) {
+                console.log('No tiene ninguna compra registrada, por favor registre una compra primero');
+                return;
+            } else {
+                console.log('Estas son las compras que actualmente están registradas:\n\n ');
+                console.table(comprasLista);
+                return;
+            }
+        case 6: // Roles
+            if (rolesLista.length === 0) {
+                console.log('No tiene ningún rol registrado, por favor registre un rol primero');
+                return;
+            } else {
+                console.log('Estos son los roles que actualmente están registrados:\n\n ');
+                console.table(rolesLista);
+                return;
+            }
+    }
 }
 
 // Constructores
