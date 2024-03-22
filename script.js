@@ -253,6 +253,8 @@ function gestionarRoles() {
     } while (true);
 }
 
+//Funciones de gestionamiento
+
 function añadir(entidad) {
     switch (entidad) {
         case 1: //Proveedores
