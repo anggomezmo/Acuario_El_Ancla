@@ -8,36 +8,34 @@ var proveedoresLista = [], usuariosLista = [], productosLista = [],
     ventasLista = [], comprasLista = [], rolesLista = [];
 
 //carga el navegador para que no se bloquee por el prompt
-function cargarNavegador(){
+function cargarNavegador() {
 
-   return new Promise(resolve =>
-    setTimeout(()=>resolve('Navegador cargado'),1500)
-   ) 
+    return new Promise(resolve =>
+        setTimeout(() => resolve('Navegador cargado'), 1500)
+    )
 }
 
-async function iniciarPrograma(){
-   const carga =  await cargarNavegador()
-   console.log(carga)
-   console.log('Iniciando programa')
-   mostrarMenuPrincipal()
-}   
+async function iniciarPrograma() {
+    const carga = await cargarNavegador()
+    console.log(carga)
+    console.log('Iniciando programa')
+    mostrarMenuPrincipal()
+}
 iniciarPrograma()
 
 //Menús
 function mostrarMenuPrincipal() {
     let opcion;
     do {
-        opcion = prompt("--------------Base de datos el acuario--------------\n\n" +
+        opcion = Number(prompt("--------------Base de datos el acuario--------------\n\n" +
             "Bienvenido a la base de datos del acuario. Por favor, seleccione una entidad para continuar:\n\n" +
             "1. Proveedores\n" + "2. Usuarios\n" + "3. Productos\n" +
             "4. Ventas\n" + "5. Compras\n" + "6. Roles\n" + "7. Salir\n\n" +
-            "Ingrese el número de la entidad que desea gestionar:");
-
-            
+            "Ingrese el número de la entidad que desea gestionar:"));
 
         switch (opcion) {
             case 1:
-                alert('Entrando a proveedores')
+                console.log('Entrando a proveedores')
                 gestionarProveedores();
                 break;
             case 2:
@@ -192,7 +190,7 @@ function gestionarVentas() {
                 añadir(4)
                 break;
             case 2:
-                editar(4n)
+                editar(4)
                 break;
             case 3:
                 mostrar(4)
@@ -274,6 +272,7 @@ function gestionarRoles() {
 //Funciones de gestionamiento
 
 function añadir(entidad) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     switch (entidad) {
         case 1: //Proveedores
             let id_tributario = prompt('--------------Añadir Proveedores--------------\n\n' +
@@ -284,8 +283,17 @@ function añadir(entidad) {
                 'Por favor ingrese la dirección del proveedor:');
             let telefono_proveedor = prompt('--------------Añadir Proveedores--------------\n\n' +
                 'Por favor ingrese el teléfono del proveedor:');
-            let correo_proveedor = prompt('--------------Añadir Proveedores--------------\n\n' +
-                'Por favor ingrese el correo del proveedor:');
+            let correo_proveedor;
+            while (true) {
+                correo_proveedor = prompt('--------------Añadir Proveedores--------------\n\n' +
+                    'Por favor ingrese el correo del proveedor:');
+                if (emailRegex.test(correo_proveedor)) {
+                    break;
+                } else {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+
+            }
             let categoria_productos = prompt('--------------Añadir Proveedores--------------\n\n' +
                 'Por favor ingrese la categoría de productos del proveedor:');
             // Creamos un nuevo proveedor y lo añadimos a la lista
@@ -304,8 +312,16 @@ function añadir(entidad) {
                 "Por favor ingrese el nombre del usuario:");
             let apellido_usuario = prompt("--------------Añadir Usuarios--------------\n\n" +
                 "Por favor ingrese el apellido del usuario:");
-            let correo_usuario = prompt("--------------Añadir Usuarios--------------\n\n" +
-                "Por favor ingrese el correo del usuario:");
+            let correo_usuario;
+            while (true) {
+                correo_usuario = prompt("--------------Añadir Usuarios--------------\n\n" +
+                    "Por favor ingrese el correo del usuario:");
+                if (emailRegex.test(correo_usuario)) {
+                    break;
+                } else {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+            }
             let rol_usuario = prompt("--------------Añadir Usuarios--------------\n\n" +
                 "Por favor ingrese el rol del usuario:");
 
@@ -323,18 +339,43 @@ function añadir(entidad) {
                 "Por favor ingrese el nombre del producto:");
             let descripcion_producto = prompt("--------------Añadir Productos--------------\n\n" +
                 "Por favor ingrese la descripción del producto:");
+
+
             let tipo_producto = prompt("--------------Añadir Productos--------------\n\n" +
                 "Por favor ingrese el tipo del producto:");
-            let precio_producto = parseFloat(prompt("--------------Añadir Productos--------------\n\n" +
-                "Por favor ingrese el precio del producto:"));
-            let unidades_disponibles = parseInt(prompt("--------------Añadir Productos--------------\n\n" +
-                "Por favor ingrese las unidades disponibles del producto:"));
+            let precio_producto
+            while (true) {
+
+
+                precio_producto = parseFloat(prompt("--------------Añadir Productos--------------\n\n" +
+                    "Por favor ingrese el precio del producto:"));
+
+                if (isNaN(precio_producto)) {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+                else {
+                    break;
+                }
+            }
+            let unidades_disponibles
+            while (true) {
+                unidades_disponibles = parseInt(prompt("--------------Añadir Productos--------------\n\n" +
+                    "Por favor ingrese las unidades disponibles del producto:"));
+                if (isNaN(unidades_disponibles)) {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+                else {
+                    break;
+                }
+            }
+
+
 
             let nuevoProducto = new Producto(id_producto, nombre_producto, descripcion_producto,
                 tipo_producto, precio_producto, unidades_disponibles);
 
             productosLista.push(nuevoProducto);
-            console.log("Producto añadido correctamente ❤️");
+            console.log("Producto añadido correctamente");
             return;
 
         case 4:
@@ -344,11 +385,22 @@ function añadir(entidad) {
                 "Por favor ingrese la fecha y hora de la compra:");
             let id_cliente = prompt("--------------Registrar Venta--------------\n\n" +
                 "Por favor ingrese el ID del cliente:");
-            let total_venta = parseFloat(prompt("--------------Registrar Venta--------------\n\n" +
-                "Por favor ingrese el total de la venta:"));
+            let total_venta
+            while (true) {
+
+                total_venta = parseFloat(prompt("--------------Registrar Venta--------------\n\n" +
+                    "Por favor ingrese el total de la venta:"));
+                if (isNaN(total_venta)) {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+                else {
+                 
+                    break;
+                }
+            }
             let metodo_pago_venta = prompt("--------------Registrar Venta--------------\n\n" +
                 "Por favor ingrese el método de pago de la venta:");
-
+           
             let nuevaVenta = new Venta(id_venta, fecha_hora_compra, id_cliente, total_venta, metodo_pago_venta);
 
             ventasLista.push(nuevaVenta);
@@ -361,8 +413,18 @@ function añadir(entidad) {
                 "Por favor ingrese el ID de la compra:");
             let metodo_pago_compra = prompt("--------------Registrar Compra--------------\n\n" +
                 "Por favor ingrese el método de pago de la compra:");
-            let total_compra = parseFloat(prompt("--------------Registrar Compra--------------\n\n" +
-                "Por favor ingrese el total de la compra:"));
+            let total_compra
+            while (true) {
+
+                total_compra = parseFloat(prompt("--------------Registrar Compra--------------\n\n" +
+                    "Por favor ingrese el total de la compra:"));
+                if (isNaN(total_compra)) {
+                    console.log('Formato no valido, intente de nuevo');
+                }
+                else {
+                    break;
+                }
+            }
             let productos_comprados = prompt("--------------Registrar Compra--------------\n\n" +
                 "Por favor ingrese los productos comprados:");
 
@@ -538,6 +600,7 @@ function eliminar(entidad) {
 }
 
 function editar(entidad) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     switch (entidad) {
         case 1:
             if (proveedoresLista.length === 0) {
@@ -565,7 +628,15 @@ function editar(entidad) {
                 let nombre_proveedor = prompt('Ingrese el nuevo nombre del proveedor:');
                 let direccion_proveedor = prompt('Ingrese la nueva dirección del proveedor:');
                 let telefono_proveedor = prompt('Ingrese el nuevo teléfono del proveedor:');
-                let correo_proveedor = prompt('Ingrese el nuevo correo del proveedor:');
+                let correo_proveedor
+                while (true) {
+                    correo_proveedor = prompt('Ingrese el nuevo correo del proveedor:');
+                    if (emailRegex.test(correo_proveedor)) {
+                        break;
+                    } else {
+                        console.log('Formato no valido, intente de nuevo');
+                    }
+                }
                 let categoria_productos = prompt('Ingrese la nueva categoría de productos del proveedor:');
 
                 // Actualizar los datos del proveedor
@@ -606,7 +677,15 @@ function editar(entidad) {
                 let tipo_documento_usuario = prompt('Ingrese el nuevo tipo de documento del usuario:');
                 let nombre_usuario = prompt('Ingrese el nuevo nombre del usuario:');
                 let apellido_usuario = prompt('Ingrese el nuevo apellido del usuario:');
-                let correo_usuario = prompt('Ingrese el nuevo correo del usuario:');
+                let correo_usuario
+                while (true) {
+                    correo_usuario = prompt('Ingrese el nuevo correo del usuario:');
+                    if (emailRegex.test(correo_usuario)) {
+                        break;
+                    } else {
+                        console.log('Formato no valido, intente de nuevo');
+                    }
+                }
                 let rol_usuario = prompt('Ingrese el nuevo rol del usuario:');
 
                 // Actualizar los datos del usuario
@@ -647,8 +726,26 @@ function editar(entidad) {
                 let nombre_producto = prompt('Ingrese el nuevo nombre del producto:');
                 let descripcion_producto = prompt('Ingrese la nueva descripción del producto:');
                 let tipo_producto = prompt('Ingrese el nuevo tipo de producto:');
-                let precio_producto = prompt('Ingrese el nuevo precio del producto:');
-                let unidades_disponibles = prompt('Ingrese las nuevas unidades disponibles del producto:');
+                let precio_producto
+                while (true) {
+                    precio_producto = prompt('Ingrese el nuevo precio del producto:');
+                    if (isNaN(precio_producto)) {
+                        console.log('Formato no valido, intente de nuevo');
+                    } else {
+                        break;
+                    }
+                }
+                let unidades_disponibles
+                while (true) {
+
+                     unidades_disponibles = prompt('Ingrese las nuevas unidades disponibles del producto:');
+                    if (isNaN(unidades_disponibles)) {
+                        console.log('Formato no valido, intente de nuevo');
+                    } else {
+                        break;
+                    }
+                }
+
 
                 // Actualizar los datos del producto
                 producto.id_producto = id_producto;
@@ -687,7 +784,16 @@ function editar(entidad) {
                 let id_venta = prompt('Ingrese el nuevo ID de la venta:');
                 let fecha_hora_compra = prompt('Ingrese la nueva fecha y hora de la compra:');
                 let id_cliente = prompt('Ingrese el nuevo ID del cliente:');
-                let total_venta = prompt('Ingrese el nuevo total de la venta:');
+                let total_venta
+                while (true) {
+                    total_venta = prompt('Ingrese el nuevo total de la venta:');
+                    if (isNaN(total_venta)) {
+                        console.log('Formato no valido, intente de nuevo');
+                    }
+                    else {
+                        break;
+                    }
+                }
                 let metodo_pago_venta = prompt('Ingrese el nuevo método de pago de la venta:');
 
                 // Actualizar los datos de la venta
@@ -724,7 +830,16 @@ function editar(entidad) {
                 // Solicitar los nuevos datos de la compra
                 let id_compra = prompt('Ingrese el nuevo ID de la compra:');
                 let metodo_pago_compra = prompt('Ingrese el nuevo método de pago de la compra:');
-                let total_compra = prompt('Ingrese el nuevo total de la compra:');
+                let total_compra
+                while (true) {
+                     total_compra = prompt('Ingrese el nuevo total de la compra:');
+                    if (isNaN(total_compra)) {
+                        console.log('Formato no valido, intente de nuevo');
+                    }
+                    else {
+                        break;
+                    }
+                }
                 let productos_comprados = prompt('Ingrese los nuevos productos comprados:');
 
                 // Actualizar los datos de la compra
