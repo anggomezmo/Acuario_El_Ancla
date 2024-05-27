@@ -1,25 +1,43 @@
 
+
+
+alert(`POR FAVOR LEA LA PÁGINA ANTES DE ACEPTAR`)
+
 //Creamos las listas que representan cada tabla
 var proveedoresLista = [], usuariosLista = [], productosLista = [],
     ventasLista = [], comprasLista = [], rolesLista = [];
 
+//carga el navegador para que no se bloquee por el prompt
+function cargarNavegador(){
 
-//Ejecución del progrma
-mostrarMenuPrincipal()
+   return new Promise(resolve =>
+    setTimeout(()=>resolve('Navegador cargado'),1500)
+   ) 
+}
+
+async function iniciarPrograma(){
+   const carga =  await cargarNavegador()
+   console.log(carga)
+   console.log('Iniciando programa')
+   mostrarMenuPrincipal()
+}   
+iniciarPrograma()
 
 //Menús
 function mostrarMenuPrincipal() {
     let opcion;
     do {
-        opcion = Number(prompt("--------------Base de datos el acuario--------------\n\n" +
+        opcion = prompt("--------------Base de datos el acuario--------------\n\n" +
             "Bienvenido a la base de datos del acuario. Por favor, seleccione una entidad para continuar:\n\n" +
             "1. Proveedores\n" + "2. Usuarios\n" + "3. Productos\n" +
             "4. Ventas\n" + "5. Compras\n" + "6. Roles\n" + "7. Salir\n\n" +
-            "Ingrese el número de la entidad que desea gestionar:"));
+            "Ingrese el número de la entidad que desea gestionar:");
+
+            
 
         switch (opcion) {
             case 1:
-                console.log('Entrando a proveedores...')
+                alert('Entrando a proveedores')
                 gestionarProveedores();
                 break;
             case 2:
@@ -316,7 +334,7 @@ function añadir(entidad) {
                 tipo_producto, precio_producto, unidades_disponibles);
 
             productosLista.push(nuevoProducto);
-            console.log("Producto añadido correctamente:");
+            console.log("Producto añadido correctamente ❤️");
             return;
 
         case 4:
