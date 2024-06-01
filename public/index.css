@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  max-width: 100%;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  padding: 5%;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-btn{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2%;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: dodgerblue;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: dodgerblue;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #007bff;
+}
+
+.links {
+  text-align: center;
+}
+
+.links a {
+  color: dodgerblue;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.links a:hover {
+  color: #007bff;
+}
+
+.toggle-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

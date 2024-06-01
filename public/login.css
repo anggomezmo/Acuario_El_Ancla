@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+body {
+    margin: 0;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+.body-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(200,249,219,1) 0%, rgba(185,231,229,1) 28%, rgba(148,186,254,1) 100%);
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25% 1fr;
+    margin: 0;
+
+
+    box-sizing: border-box;
+    width: 38%;
+    height: 50%;
+    border: solid 8px orangered;
+    border-radius: 15px;
+}
+
+.ancla-title {
+
+    display: flex;
+    box-sizing: border-box;
+
+    align-items: center;
+    margin: 0;
+
+    grid-column: 1;
+    grid-row: 1;
+    height: auto;
+}
+
+.ancla-title h1 {
+    box-sizing: border-box;
+    margin: 0;
+    margin-left: 1.5em;
+
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3em;
+}
+
+.login-form {
+    box-sizing: border-box;
+    display: grid;
+    grid-row: 2;
+    /*su padre es grid*/
+    /* Centrar elementos horizontalmente */
+    align-items: center;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 70% 1fr;
+
+
+}
+
+.login-inputs{
+    display: flex;
+    
+    box-sizing: border-box;
+    padding-left: 1.5em;
+    margin: 1.2em;
+    margin-left: 3.5rem;
+    width: 70%;
+    height: 50%;
+    border-radius: 20px;
+    border: 5px solid black;
+    grid-column: 1/3;
+    background: none;
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5em;
+    color: black;
+}
+
+.login-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 60%;
+    height: 42%;
+    margin-left: 3.5rem;
+   background: linear-gradient(90deg, rgba(255,215,87,1) 0%, rgba(255,150,77,1) 100%);
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2em;
+
+}
+
+.login-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
