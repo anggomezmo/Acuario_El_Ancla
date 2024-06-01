@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
 body {
     margin: 0;
     height: 100vh;
@@ -8,27 +9,44 @@ body {
 }
 
 .body-container {
+    position: relative;
     display: flex;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(90deg, rgba(200,249,219,1) 0%, rgba(185,231,229,1) 28%, rgba(148,186,254,1) 100%);
+    background: linear-gradient(90deg, rgba(200, 249, 219, 1) 0%, rgba(185, 231, 229, 1) 28%, rgba(148, 186, 254, 1) 100%);
     justify-content: center;
     align-items: center;
+    position: absolute;
 }
 
 .login {
-
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 25% 1fr;
-    margin: 0;
-
-
-    box-sizing: border-box;
     width: 38%;
     height: 50%;
-    border: solid 8px orangered;
-    border-radius: 15px;
+    z-index: 5;
+    background: none;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    padding: 8px; /* Espesor del borde */
+    background: linear-gradient(90deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
 }
 
 .ancla-title {
@@ -56,6 +74,7 @@ body {
 }
 
 .login-form {
+    z-index: 6;
     box-sizing: border-box;
     display: grid;
     grid-row: 2;
@@ -68,9 +87,9 @@ body {
 
 }
 
-.login-inputs{
+.login-inputs {
     display: flex;
-    
+
     box-sizing: border-box;
     padding-left: 1.5em;
     margin: 1.2em;
@@ -87,8 +106,11 @@ body {
     font-size: 1.5em;
     color: black;
 }
+.login-inputs:focus{
+    outline:  none;
+}
 
-.login-button{
+.login-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,7 +118,7 @@ body {
     width: 60%;
     height: 42%;
     margin-left: 3.5rem;
-   background: linear-gradient(90deg, rgba(255,215,87,1) 0%, rgba(255,150,77,1) 100%);
+    background: linear-gradient(90deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
     font-family: "Chewy", system-ui;
     font-weight: 400;
     font-style: normal;
@@ -104,8 +126,33 @@ body {
 
 }
 
-.login-logo{
+.login-logo {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.circle-one {
+    position: absolute;
+    z-index: 4;
+    overflow: hidden;
+    width: 70vw;
+    height: 70vw;
+    top: 40vh;
+    right: 108vh;
+    border-radius: 100%;
+
+    background: linear-gradient(50deg, rgba(200,249,219,1) 0%, rgba(183,228,231,1) 29%, rgb(127, 173, 248) 100%);
+}
+.circle-two {
+    position: absolute;
+    z-index: 4;
+    overflow: hidden;
+    width:70vw;
+    height: 70vw;
+    bottom: 60vh;
+    left: 140vh;
+    border-radius: 100%;
+    background: linear-gradient(54deg, rgba(255,214,87,1) 0%, rgba(255,149,77,1) 33%);
+    
 }
