@@ -157,3 +157,9 @@ body {
     background: linear-gradient(54deg, rgba(255,214,87,1) 0%, rgba(255,149,77,1) 33%);
     
 }
+.overlay-modal{
+    display: none;
+    z-index: 7;
+    width: 100vh;
+    height: 100vh;
+}
