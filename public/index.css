@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
 :root {
   --first-color: #2e94b9; 
   --second-color:#475053; 
@@ -10,74 +13,96 @@
 
 html {
   height: 100%;
+  margin: 0;
   overflow: hidden;
 }
 
 body {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 .body-container {
-
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
 .header {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle, rgba(96,136,196,1) 0%, rgba(66,115,184,1) 50%, rgba(51,109,180,1) 100%);
+  justify-content: space-between;
+  background: linear-gradient(90deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
 
   border-bottom: solid var(--fifth-color);
+  font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+.left{
+  margin-right:auto ;
+ 
+}
+.center{
+  margin-right:auto ;
 }
 
 .main-container {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--third-color);
-  height: 80%;
-  padding: 2em;
+  flex: 1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 80%   ;
+  background: linear-gradient(90deg, rgba(200, 249, 219, 1) 0%, rgba(185, 231, 229, 1) 28%, rgba(148, 186, 254, 1) 100%);
 }
 
-.entities {
-  display: flex;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  margin: 2em;
-  width: 35%;
-  height: 70%;
-}
+
 
 
 .button-list{
-
-  display: flex;
-  padding: 8%;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
+  
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+align-items: center;
+justify-items: center;
+margin: 0; 
 }
 
 .button-list li{
   display: flex;
-  justify-content: center;
   align-items: center;
-  border: solid 1px var(--fifth-color);
-  width: 70%;
-  height: 8%;
-  background: var(--first-color);
+  justify-content: center;
+  border-radius: 20px;
+  width: 60%;
+  height: 42%;
+  margin-left: 3.5rem;
+  background: linear-gradient(90deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
+  font-family: "Chewy", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  cursor: pointer;
 
 }
 
+.button-list li:hover {
+  background: linear-gradient(270deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
+  font-family: "Chewy", system-ui;
+}
+.button-list li:active{
+  background: #f1771a;
+}
 footer {
-  background: var(--first-color);
-  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(33,180,242,1) 0%, rgba(108,181,255,1) 100%);
+  height: auto ;
+  color: white;
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  padding: 1em;
 }

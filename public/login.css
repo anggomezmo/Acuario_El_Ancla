@@ -128,6 +128,10 @@ body {
     cursor: pointer;
 
 }
+.login-button:hover{
+    background: linear-gradient(270deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);
+    font-family: "Chewy", system-ui;
+}
 .login-button:active{
     background: #f1771a;
 }
@@ -228,8 +232,12 @@ display: none;
     height: 2.5em;
     width: 100%;
     border-radius: 5px;
-    background: linear-gradient(180deg, rgba(56, 183, 237, 1) 0%, rgba(22, 1, 255, 1) 100%);
+    background: linear-gradient(180deg, rgba(56, 183, 237, 1) 0%, rgba(22, 1, 255, 1) 100%);;
     font-family: "JetBrains Mono", monospace;
+}
+.accept:hover{
+    background: linear-gradient(0deg, rgba(56, 183, 237, 1) 0%, rgba(22, 1, 255, 1) 100%);
+
 }
 .accept:active{
     background: blue;

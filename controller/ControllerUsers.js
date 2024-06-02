@@ -18,7 +18,7 @@ export function validateUser() {
       else {
          console.log('entre')
          document.querySelector('#warning').textContent = 'INICIO DE SESIÓN DENEGADO'
-         document.querySelector('#message').textContent = 'El usuario o la contraseña ingresado es incorrecto, por favor intentelo de nuevo'
+         document.querySelector('#message').textContent = 'El usuario o la contraseña ingresados son incorrectos, por favor, inténtelo de nuevo.'
          document.querySelector('#modal').classList.remove('hidden');
 
       }
