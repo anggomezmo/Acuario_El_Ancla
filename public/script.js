@@ -1,6 +1,7 @@
 
 
 
+
 alert(`POR FAVOR LEA LA PÁGINA ANTES DE ACEPTAR`)
 
 //Creamos las listas que representan cada tabla

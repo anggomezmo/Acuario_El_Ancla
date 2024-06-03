@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./public/index.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./public/index.css">
+    </head>
 
-<body>
-    <div class="body-container">
+    <body>
+        <div class="body-container">  
+            <header class="header">
+                <img class="left" src="/public/logo-ancla-removebg-preview.png"
+                    alt>
+                <h1 class="center">Gestor Acuario el Ancla</h1>
 
-        <header class="header">
-            <img class="left" src="/public/logo-ancla-removebg-preview.png" alt="">
-            <h1 class="center">Gestor Acuario el Ancla</h1>
-           
-        </header>
+            </header>
 
 
-        <div class="main-container">
+            <div class="main-container" id="main-container">
 
-           
-                <ul class="button-list">
-                    <li>Proveedores</li>
-                    <li>Productos</li>
-                    <li>Ventas</li>
+                <div class="side-bar hidden" id="side-bar">
+
+                </div>
+
+                <ul class="button-list" >
+                    <li class="entitie">Proveedores</li>
+                    <li class="entitie">Productos</li>
+                    <li class="entitie">Ventas</li>
                 </ul>
-           
 
-            
                 <ul class="button-list">
-                    <li>Compras</li>
-                    <li>Usuarios</li>
-                    <li>Clientes</li>
+                    <li class="entitie">Compras</li>
+                    <li class="entitie">Usuarios</li>
+                    <li class="entitie">Clientes</li>
                 </ul>
-           
 
+            </div>
+
+
+
+            <footer>
+                © 2024 Acuario El Ancla. Todos los derechos reservados.
+            </footer>
         </div>
-
-        <footer>
-            © 2024 Acuario El Ancla. Todos los derechos reservados.
-        </footer>
-    </div>
-    <script src=""></script>
-</body>
+        <script type="module" src="/public/indexScript.js"></script>
+    </body>
 
 </html>
