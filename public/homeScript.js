@@ -25,6 +25,11 @@ function setDefaultTitle(){
 }
 document.getElementById('back-button').addEventListener('click',hideSideBar)
 document.getElementById('back-button').addEventListener('click',setDefaultTitle)
+document.getElementById('back-button').addEventListener('click',hideMainContent)
+
+function hideMainContent(){
+    document.getElementById('show-container').classList.add('hidden')
+}
 
 function hideSideBar(){
     document.getElementById('main-container').classList.toggle('configure-main-container')

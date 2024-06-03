@@ -80,21 +80,26 @@ export let users= [
         userRole: 'EMPLEADO'
     },
     {
+        user: 'Employee2',
+        password: 'password2',
         documentType: 'Cedula',
-        documentNumber: '5678901',
-        userName: 'Gloria',
-        userLastName: 'Ortega',
-        userEmail: 'gloriaortega@correo.com',
-        userRole: 'CLIENTE'
-    },
-    {
-        documentType: 'Cedula',
-        documentNumber: '6789012',
-        userName: 'Victor',
-        userLastName: 'Rivas',
-        userEmail: 'victorrivas@correo.com',
-        userRole: 'CLIENTE'
+        documentNumber: '1122334455',
+        userName: 'Juan',
+        userLastName: 'Martinez',
+        userEmail: 'juanmartinez@correo.com',
+        userRole: 'EMPLEADO'
+    }, {
+        user: 'Employee1',
+        password: 'password1',
+        documentType: 'Pasaporte',
+        documentNumber: '987654321',
+        userName: 'Maria',
+        userLastName: 'Lopez',
+        userEmail: 'marialopez@correo.com',
+        userRole: 'EMPLEADO'
     }
+   
+  
 ]
 
 export default users
