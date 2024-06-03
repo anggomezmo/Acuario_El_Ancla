@@ -23,3 +23,10 @@ function hideSideBar(){
     let uls = document.querySelectorAll('.button-list')
     uls.forEach(ul => ul.classList.toggle('hidden'))
 }
+
+//add functionality to cerrar sesión button
+
+document.querySelector('#log-out-button').addEventListener('click',logOut)
+function logOut(){
+    window.location.href = 'view/login.html'
+}
