@@ -40,8 +40,8 @@ body {
 
   border-bottom: solid var(--fifth-color);
   font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-weight: 400;
+  font-style: normal;
 
 }
 
@@ -183,11 +183,33 @@ footer {
   text-align: center;
   padding: 1em;
 }
-.hidden{
-  display: none;
-}
 
 .configure-main-container{
   grid-template-columns: 25% auto;
   grid-template-rows: 1fr;
+}
+
+.show-container{
+  box-sizing: border-box;
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 15% 1fr 1fr ;
+  padding: 2em;
+}
+.entitie-title{
+  box-sizing: border-box;
+  grid-column: 1/4;
+  height: 100%;
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  
+}
+.hidden{
+  display: none;
 }
