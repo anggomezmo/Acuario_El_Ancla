@@ -1,32 +1,9 @@
-let buttons = document.querySelectorAll('.entitie')
-// add functionality to entitie buttons.
-buttons.forEach(button => {
-    button.addEventListener('click', showSideBar)
-})
+import { validateUser } from "../controller/ControllerUsers.js";
 
-function showSideBar() {
+document.querySelector('#login-button').addEventListener('click',validateUser)
+document.querySelector('#accept').addEventListener('click', hideModal)
 
-    document.getElementById('main-container').classList.toggle('configure-main-container')
-
-    document.getElementById('side-bar').classList.toggle('hidden')
-    let uls = document.querySelectorAll('.button-list')
-    uls.forEach(ul => ul.classList.toggle('hidden'))
-}
-
-// add functionality to back-button in side-bar
-
-document.getElementById('back-button').addEventListener('click',hideSideBar)
-
-function hideSideBar(){
-    document.getElementById('main-container').classList.toggle('configure-main-container')
-    document.getElementById('side-bar').classList.toggle('hidden')
-    let uls = document.querySelectorAll('.button-list')
-    uls.forEach(ul => ul.classList.toggle('hidden'))
-}
-
-//add functionality to cerrar sesión button
-
-document.querySelector('#log-out-button').addEventListener('click',logOut)
-function logOut(){
-    window.location.href = 'view/login.html'
+//add functionality to modal pop  up
+function hideModal(){
+    document.querySelector('#modal').classList.add('hidden')
 }

@@ -13,7 +13,7 @@ export function validateUser() {
   
    if (status != -1) {//if user exists
       if (users[status].password === password) {
-         window.location.href = '../index.html'
+         window.location.href = '/view/home.html'
       }
       else {
          console.log('entre')
