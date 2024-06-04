@@ -40,13 +40,13 @@ export let users= [
         userRole: 'EMPLEADO'
     },
     {
-        user: 'AnaBelle',
-        password: 'pass456',
+        user: 'Girux',
+        password: 'LSQGirux',
         documentType: 'Pasaporte',
         documentNumber: '8765432',
-        userName: 'Ana',
-        userLastName: 'Martinez',
-        userEmail: 'anamartinez@correo.com',
+        userName: 'Sebastian',
+        userLastName: 'Gil',
+        userEmail: 'cuchurrumi@correo.com',
         userRole: 'ADMINISTRADOR'
     },
     {

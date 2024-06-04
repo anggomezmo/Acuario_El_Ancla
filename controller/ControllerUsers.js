@@ -48,6 +48,10 @@ export function showUsers(){
    else{
 
       let container = document.querySelector('.show-container')
+      
+      let previousContents= document.querySelectorAll('.card')
+      previousContents.forEach(node => {node.remove()})
+
       document.getElementById('entitie-title').textContent= 'USUARIOS'
       users.forEach(user =>{
          let tarjeta = document.createElement('div')
