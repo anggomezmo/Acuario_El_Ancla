@@ -3,12 +3,14 @@ import { changeTitleCustomer } from "../controller/ControllerCustomer.js"
 import { changeTitleSales } from "../controller/ControllerSales.js"
 import { changeTitleProduct } from "../controller/ControllerProduct.js"
 import { changeTitlePurchase } from "../controller/ControllerPurchase.js"
+import { changeTitleSupplier } from "../controller/ControllerSuppliers.js"
 
 import { showPurchases } from "../controller/ControllerPurchase.js"
 import { showProductos } from "../controller/ControllerProduct.js"
 import { showSales } from "../controller/ControllerSales.js"
 import { showUsers } from "../controller/ControllerUsers.js"
 import { showCustomers } from "../controller/ControllerCustomer.js"
+import { showSuppliers } from "../controller/ControllerSuppliers.js"
 
 
 
@@ -101,7 +103,10 @@ let purchasesButton = document.getElementById('purchases')
 purchasesButton.addEventListener('click', pressedEntitie)
 purchasesButton.addEventListener('click', changeTitlePurchase)
 
-
+//Proveedores button
+let suppliersButton = document.getElementById('suppliers')
+suppliersButton.addEventListener('click', pressedEntitie)
+suppliersButton.addEventListener('click', changeTitleSupplier)
 
 
 
@@ -128,9 +133,10 @@ function showEntitie() {
         case 'purchases':
             showPurchases()
             break;
-
-        default:
+        case 'suppliers':
+            showSuppliers()
             break;
+    
     }
 }
 
