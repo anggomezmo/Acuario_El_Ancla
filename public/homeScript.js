@@ -12,6 +12,7 @@ import { showUsers } from "../controller/ControllerUsers.js"
 import { showCustomers } from "../controller/ControllerCustomer.js"
 import { showSuppliers } from "../controller/ControllerSuppliers.js"
 
+import { addUser } from "../controller/ControllerUsers.js"
 
 
 // ACTUAL BUTTON PRESSED;
@@ -136,7 +137,19 @@ function showEntitie() {
         case 'suppliers':
             showSuppliers()
             break;
-    
+
+    }
+}
+
+
+// add button Functionality
+document.getElementById('add-button').addEventListener('click', addRecord)
+
+function addRecord() {
+    switch (buttonPressed) {
+        case 'users':
+            addUser();
+            break
     }
 }
 

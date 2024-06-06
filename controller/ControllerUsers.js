@@ -38,6 +38,10 @@ export function changeTitleUser(){
    document.getElementById('logo-title').textContent='Gestionar Usuarios'
 }
 
+
+
+//SHOW BUTTON
+
 export function showUsers(){
       // users length comprobation
    if(users.length==0){
@@ -73,4 +77,36 @@ export function showUsers(){
    }
 
 
+}
+
+
+// ADD BUTTON
+
+export function addUser(){
+   let container = document.querySelector('.show-container')
+ let  form = document.createElement('div')
+ let title = document.createElement('h1')
+ title.textContent='Añadir registro'
+ let button = document.createElement('button')
+ button.innerText = 'Añadir Usuario'
+ container.append(form)
+ form.classList.add('addForm')
+ form.append(title)
+ let placeholders = [
+    'Usuario de aplicativo',
+    'Contraseña de aplicativo',
+    'Tipo de documento',
+    'Número de documento',
+    'Nombre',
+    'Apellido',
+    'Email',
+    'Rol'
+   ];
+   for (let i = 0; i < 8; i++) {
+      let input = document.createElement('input');
+      input.placeholder= placeholders[i]
+      form.appendChild(input);
+   }
+   form.appendChild(button)
+   document.querySelector('#show-container').classList.remove('hidden')
 }
