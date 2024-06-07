@@ -16,8 +16,7 @@ export function changeTitlePurchase(){
       
        let container = document.querySelector('.show-container')
        //deleting previous content
-       let previousContents= document.querySelectorAll('.card')
-       previousContents.forEach(node => {node.remove()})
+       clearContainer()
 
 
 
@@ -44,3 +43,119 @@ export function changeTitlePurchase(){
  
  
  }
+
+ export function addPurchase() {
+   clearContainer();
+   document.getElementById('entitie-title').textContent = 'Registrar compra';
+   let container = document.querySelector('.show-container');
+   let form = document.createElement('div');
+   let title = document.createElement('h1');
+   form.classList.add('addForm');
+   title.textContent = 'Añadir registro';
+   let button = document.createElement('button');
+   button.innerText = 'Añadir Compra';
+   buttonAddRecordConfiguration(button); // addEventListener to the button
+   container.append(form);
+   form.append(title);
+
+   let placeholders = [
+       'ID de la Compra',
+       'Método de Pago',
+       'Total de la Compra',
+       'ID del Usuario'
+   ];
+   let inputIds = [
+       'purchaseId',
+       'purchaseMethodPay',
+       'purchaseTotal',
+       'purchaseUserId'
+   ];
+
+   for (let i = 0; i < placeholders.length; i++) {
+       let input = document.createElement('input');
+       input.id = inputIds[i];
+       input.placeholder = placeholders[i];
+       input.autocomplete = 'off';
+       form.appendChild(input);
+   }
+
+   form.appendChild(button);
+   document.querySelector('#show-container').classList.remove('hidden');
+}
+
+function buttonAddRecordConfiguration(button) {
+   button.addEventListener('click', verifyPurchaseForm);
+}
+
+function verifyPurchaseForm() {
+   let allInputsCorrect;
+   let inputs = {
+       purchaseId: document.getElementById('purchaseId').value,
+       purchaseMethodPay: document.getElementById('purchaseMethodPay').value,
+       purchaseTotal: document.getElementById('purchaseTotal').value,
+       purchaseUserId: document.getElementById('purchaseUserId').value
+   };
+
+   allInputsCorrect = areAllFieldsValid(inputs, 'purchase');
+
+   if (allInputsCorrect) {
+       purchases.push(inputs);
+
+       document.querySelector('#warning').textContent = 'COMPRA REGISTRADA!';
+       document.querySelector('#message').textContent = 'La compra ha sido registrada con éxito.';
+       document.querySelector('#modal').classList.remove('hidden');
+
+       document.getElementById('purchaseId').value = '';
+       document.getElementById('purchaseMethodPay').value = '';
+       document.getElementById('purchaseTotal').value = '';
+       document.getElementById('purchaseUserId').value = '';
+   }
+}
+
+function areAllFieldsValid(inputs, type) {
+   for (const input in inputs) {
+       if (!validateInput(input, inputs[input], type)) {
+           document.querySelector('#warning').textContent = 'FORMATO INVALIDO';
+           document.querySelector('#message').textContent = 'Asegúrese de que los campos estén en un formato válido para poder ingresar el registro.';
+           document.querySelector('#modal').classList.remove('hidden');
+           return false;
+       }
+   }
+
+   if (type === 'purchase' && findPurchaseById(inputs['purchaseId'])) {
+       document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE';
+       document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.';
+       document.querySelector('#modal').classList.remove('hidden');
+       return false;
+   }
+
+   return true;
+}
+
+function validateInput(input, value, type) {
+   if (!value.trim()) {
+       return false;
+   }
+
+   switch (input) {
+       case 'purchaseId':
+           return /^[A-Za-z0-9-]+$/.test(value);
+       case 'purchaseMethodPay':
+           return /^[A-Za-z\s]+$/.test(value);
+       case 'purchaseTotal':
+           return /^[0-9]+$/.test(value);
+       case 'purchaseUserId':
+           return /^[A-Za-z0-9]+$/.test(value);
+   }
+}
+
+function findPurchaseById(purchaseId) {
+   return purchases.some(purchase => purchase.purchaseId === purchaseId);
+}
+
+function clearContainer() {
+   let container = document.getElementById('show-container');
+   while (container.children.length > 1) {
+       container.removeChild(container.lastChild);
+   }
+}

@@ -1,7 +1,7 @@
-export let users= [
+export let users = [
     {
-        user: 'Angello',
-        password: '12345',
+        user: 'Angello123',
+        password: 'contrasena12345', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Cedula',
         documentNumber: '1234567',
         userName: 'Pepito',
@@ -10,8 +10,8 @@ export let users= [
         userRole: 'ADMINISTRADOR'
     },
     {
-        user: 'Camilo',
-        password: '54321',
+        user: 'Camilo123',
+        password: 'pass5432', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Cedula',
         documentNumber: '7654321',
         userName: 'Juan',
@@ -20,86 +20,86 @@ export let users= [
         userRole: 'EMPLEADO'
     },
     {
-        user: 'Nelson',
-        password: 'password',
+        user: 'Nelson123',
+        password: 'pass9876', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Pasaporte',
-        documentNumber: '9876543',
+        documentNumber: 'A9876543', // Agregué letras para el pasaporte
         userName: 'Maria',
-        userLastName: 'Lopez',
+        userLastName: 'López', // Agregué tilde para verificar que lo acepte
         userEmail: 'marialopez@correo.com',
         userRole: 'EMPLEADO'
     },
     {
         user: 'Carlos2020',
-        password: 'abc123',
+        password: 'pass2020', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Cedula',
         documentNumber: '2345678',
         userName: 'Carlos',
-        userLastName: 'Rodriguez',
+        userLastName: 'Rodríguez', // Agregué tilde para verificar que lo acepte
         userEmail: 'carlosrodriguez@correo.com',
         userRole: 'EMPLEADO'
     },
     {
-        user: 'Girux',
-        password: 'LSQGirux',
+        user: 'Girux123',
+        password: 'LSQGirux1', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Pasaporte',
-        documentNumber: '8765432',
-        userName: 'Sebastian',
+        documentNumber: 'B8765432', // Agregué letras para el pasaporte
+        userName: 'Sebastián', // Agregué tilde para verificar que lo acepte
         userLastName: 'Gil',
         userEmail: 'cuchurrumi@correo.com',
         userRole: 'ADMINISTRADOR'
     },
     {
         user: 'Felipe1985',
-        password: 'qwerty',
+        password: 'qwerty85', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Cedula',
         documentNumber: '3456789',
         userName: 'Felipe',
-        userLastName: 'Sanchez',
+        userLastName: 'Sánchez', // Agregué tilde para verificar que lo acepte
         userEmail: 'felipesanchez@correo.com',
         userRole: 'EMPLEADO'
     },
     {
         user: 'Laura789',
-        password: 'password789',
+        password: 'password7', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Cedula',
         documentNumber: '4567890',
         userName: 'Laura',
-        userLastName: 'Ramirez',
+        userLastName: 'Ramírez', // Agregué tilde para verificar que lo acepte
         userEmail: 'lauraramirez@correo.com',
         userRole: 'EMPLEADO'
     },
     {
         user: 'Roberto64',
-        password: 'mypassword',
+        password: 'mypass64', // Cambié la contraseña para que tenga al menos una letra y un número y tenga al menos 8 caracteres
         documentType: 'Pasaporte',
-        documentNumber: '7654321',
+        documentNumber: 'C7654321', // Agregué letras para el pasaporte
         userName: 'Roberto',
-        userLastName: 'Gutierrez',
+        userLastName: 'Gutiérrez', // Agregué tilde para verificar que lo acepte
         userEmail: 'robertogutierrez@correo.com',
         userRole: 'EMPLEADO'
     },
     {
         user: 'Employee2',
-        password: 'password2',
+        password: 'password2', // Cumple con la expresión regular
         documentType: 'Cedula',
         documentNumber: '1122334455',
         userName: 'Juan',
-        userLastName: 'Martinez',
+        userLastName: 'Martínez', // Agregué tilde para verificar que lo acepte
         userEmail: 'juanmartinez@correo.com',
         userRole: 'EMPLEADO'
-    }, {
+    }, 
+    {
         user: 'Employee1',
-        password: 'password1',
+        password: 'password1', // Cumple con la expresión regular
         documentType: 'Pasaporte',
-        documentNumber: '987654321',
+        documentNumber: 'D987654321', // Agregué letras para el pasaporte
         userName: 'Maria',
-        userLastName: 'Lopez',
+        userLastName: 'López', // Agregué tilde para verificar que lo acepte
         userEmail: 'marialopez@correo.com',
         userRole: 'EMPLEADO'
     }
-   
-  
-]
+];
+
 
 export default users

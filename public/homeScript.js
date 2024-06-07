@@ -13,6 +13,12 @@ import { showCustomers } from "../controller/ControllerCustomer.js"
 import { showSuppliers } from "../controller/ControllerSuppliers.js"
 
 import { addUser } from "../controller/ControllerUsers.js"
+import { addSupplier } from "../controller/ControllerSuppliers.js"
+import { addSale } from "../controller/ControllerSales.js"
+import { addPurchase } from "../controller/ControllerPurchase.js"
+import { addProduct } from "../controller/ControllerProduct.js"
+import { addCustomer } from "../controller/ControllerCustomer.js"
+
 
 
 // ACTUAL BUTTON PRESSED;
@@ -150,6 +156,22 @@ function addRecord() {
         case 'users':
             addUser();
             break
+        case 'suppliers':
+            addSupplier();
+            break
+        case 'sales':
+            addSale();
+            break
+        case 'purchases':
+            addPurchase()
+            break
+        case 'products':
+            addProduct()
+            break
+        case 'customers':
+            addCustomer()
+            break
+
     }
 }
 
@@ -159,3 +181,9 @@ document.querySelector('#accept').addEventListener('click', hideModal)
 function hideModal() {
     document.querySelector('#modal').classList.add('hidden')
 }
+
+
+
+
+
+
