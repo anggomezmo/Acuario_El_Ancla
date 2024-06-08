@@ -6,7 +6,7 @@ function findUser(user) {
 
    return status
 }
-function findUserRegisterForm(inputUser){
+function findUserRegisterForm(inputUser) {
    let status = users.some(user => user.user == inputUser)
    return status
 }
@@ -162,7 +162,7 @@ function verifyForm() {
       document.querySelector('#modal').classList.remove('hidden');
       document.getElementById('user').value = ''
       document.getElementById('password').value = ''
-      document.getElementById('documentType').value  = ''
+      document.getElementById('documentType').value = ''
       document.getElementById('documentNumber').value = ''
       document.getElementById('userName').value = ''
       document.getElementById('userLastName').value = ''
@@ -178,7 +178,7 @@ function verifyForm() {
 function areAllFieldsValid(inputs) {
    for (const input in inputs) {
       if (!validateInput(input, inputs[input])) { //if test fail ,show modal and return false
-         
+
          document.querySelector('#warning').textContent = 'FORMATO INVALIDO'
          document.querySelector('#message').textContent = 'Asegurese de que los campos esten en un formato valido para poder ingresar el registro.'
          document.querySelector('#modal').classList.remove('hidden');
@@ -186,7 +186,7 @@ function areAllFieldsValid(inputs) {
       }
    }
    console.log(console.log(findUserRegisterForm(inputs['user'])))
-   if(findUserRegisterForm(inputs['user'])){
+   if (findUserRegisterForm(inputs['user'])) {
       document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE'
       document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.'
       document.querySelector('#modal').classList.remove('hidden');
@@ -199,7 +199,7 @@ function validateInput(input, value) {
    if (!value.trim()) { //validate if input is empty
       return false;
    }
-   
+
    switch (input) {
       case 'user':
 
@@ -229,6 +229,68 @@ function validateInput(input, value) {
 
    }
 }
+
+
+// DELETE BUTTON
+
+export function deleteUser() {
+   if (users.length == 0) {
+      document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+      document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+      document.querySelector('#modal').classList.remove('hidden');
+   }
+   else {
+
+      let container = document.querySelector('.show-container')
+
+      clearContainer()
+
+      document.getElementById('entitie-title').textContent = 'USUARIOS'
+      users.forEach((user,index) => { // second parameter refers to the index of the actual element
+         let tarjeta = document.createElement('div')
+         let userNameCard = document.createElement('p')
+         let userDocument = document.createElement('p')
+         let userEmail = document.createElement('p')
+         let userRole = document.createElement('p')
+         let deleteButton = document.createElement('button')
+         tarjeta.classList.add('card');
+         userNameCard.textContent = `Nombre: ${user.userName} ${user.userLastName}`;
+         userDocument.textContent = `Documento: ${user.documentNumber}`;
+         userEmail.textContent = `Email: ${user.userEmail}`;
+         userRole.textContent = `Rol: ${user.userRole}`;
+         deleteButton.textContent = 'Eliminar';
+         deleteButton.dataset.documentNumber = user.documentNumber;
+         deleteButton.addEventListener('click', detectCardUser);
+ 
+         tarjeta.append(userNameCard, userDocument, userEmail, userRole, deleteButton);
+         container.append(tarjeta);
+ 
+         document.querySelector('#show-container').classList.remove('hidden');
+     });
+   }
+ }
+ 
+ function detectCardUser(event) {
+     let parent = event.target.parentElement;
+     let documentNumber = event.target.dataset.documentNumber;
+ 
+     let userIndex = users.findIndex(user => user.documentNumber === documentNumber);
+     if (userIndex !== -1) {
+         users.splice(userIndex, 1);
+     }
+     parent.remove();
+ }
+
+
+
+
+
+
+
+
+
+
+
 function clearContainer() {
    let container = document.getElementById('show-container')
    while (container.children.length > 1) {

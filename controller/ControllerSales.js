@@ -168,9 +168,66 @@ function findSaleById(saleId) {
    return sales.some(sale => sale.saleId === saleId);
 }
 
-function clearContainer() {
-   let container = document.getElementById('show-container');
-   while (container.children.length > 1) {
-       container.removeChild(container.lastChild);
-   }
+
+
+
+// delete button
+export function deleteSale() {
+    if(sales.length==0){
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+        document.querySelector('#modal').classList.remove('hidden');
+     }
+     else{
+    let container = document.querySelector('.show-container');
+    clearContainer();
+
+    document.getElementById('entitie-title').textContent = 'VENTAS';
+    sales.forEach(sale => {
+        let tarjeta = document.createElement('div');
+        let saleId = document.createElement('p');
+        let saleDate = document.createElement('p');
+        let saleTotal = document.createElement('p');
+        let salePayMethod = document.createElement('p');
+        let saleIdUser = document.createElement('p');
+        let saleIdCustomer = document.createElement('p');
+        let deleteButton = document.createElement('button');
+
+        tarjeta.classList.add('card');
+        saleId.textContent = `ID de venta: ${sale.saleId}`;
+        saleDate.textContent = `Fecha de la venta: ${sale.saleDate}`;
+        saleTotal.textContent = `Total de la venta: $${sale.saleTotal}`;
+        salePayMethod.textContent = `Método de pago: ${sale.salePayMethod}`;
+        saleIdUser.textContent = `ID Usuario que realizó la venta: ${sale.saleIdUser}`;
+        saleIdCustomer.textContent = `ID cliente: ${sale.saleIdCustomer}`;
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.dataset.saleId = sale.saleId;
+        deleteButton.addEventListener('click', detectCardSale);
+
+        tarjeta.append(saleId, saleDate, saleTotal, salePayMethod, saleIdUser, saleIdCustomer, deleteButton);
+        container.append(tarjeta);
+
+        document.querySelector('#show-container').classList.remove('hidden');
+    });
 }
+}
+
+function detectCardSale(event) {
+    let parent = event.target.parentElement;
+    let saleId = event.target.dataset.saleId;
+    let saleIndex = sales.findIndex(sale => sale.saleId === saleId);
+    if (saleIndex !== -1) {
+        sales.splice(saleIndex, 1);
+    }
+    parent.remove();
+}
+
+function clearContainer() {
+    let container = document.getElementById('show-container');
+    while (container.children.length > 1) {
+        container.removeChild(container.lastChild);
+    }
+}
+
+
+ 

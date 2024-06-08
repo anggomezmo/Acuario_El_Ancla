@@ -281,6 +281,21 @@ footer {
   font-family: "Chewy", system-ui;
   font-weight: 400;
   font-style: normal;
+  }
+.card button{
+  box-sizing: border-box;
+  margin: 2em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 0.9em;
+  height: 2.5em;
+  width: 50%;
+  border-radius: 5px;
+  background: linear-gradient(180deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);;
+  font-family: "JetBrains Mono", monospace;
 }
 .entitie-title{
   box-sizing: border-box;

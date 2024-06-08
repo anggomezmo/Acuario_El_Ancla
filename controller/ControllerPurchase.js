@@ -153,6 +153,55 @@ function findPurchaseById(purchaseId) {
    return purchases.some(purchase => purchase.purchaseId === purchaseId);
 }
 
+
+export function deletePurchases() {
+    if (purchases.length == 0) {
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+        document.querySelector('#modal').classList.remove('hidden');
+    } else {
+        let container = document.querySelector('.show-container');
+        clearContainer();
+
+        document.getElementById('entitie-title').textContent = 'COMPRAS';
+        purchases.forEach(purchase => {
+            let tarjeta = document.createElement('div');
+            let purchaseId = document.createElement('p');
+            let purchaseMethodPay = document.createElement('p');
+            let purchaseTotal = document.createElement('p');
+            let purchaseUserId = document.createElement('p');
+            let deleteButton = document.createElement('button');
+
+            tarjeta.classList.add('card');
+            purchaseId.textContent = `ID de compra: ${purchase.purchaseId}`;
+            purchaseMethodPay.textContent = `Metodo de pago: ${purchase.purchaseMethodPay}`;
+            purchaseTotal.textContent = `Total de la compra: $${purchase.purchaseTotal}`;
+            purchaseUserId.textContent = `ID usuario que realizó la compra: ${purchase.purchaseUserId}`;
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.dataset.purchaseId = purchase.purchaseId;
+            deleteButton.addEventListener('click', detectCardPurchase);
+
+            tarjeta.append(purchaseId, purchaseTotal, purchaseMethodPay, purchaseUserId, deleteButton);
+            container.append(tarjeta);
+
+            document.querySelector('#show-container').classList.remove('hidden');
+        });
+    }
+}
+
+function detectCardPurchase(event) {
+    let parent = event.target.parentElement;
+    let purchaseId = event.target.dataset.purchaseId;
+    let purchaseIndex = purchases.findIndex(purchase => purchase.purchaseId === purchaseId);
+    if (purchaseIndex !== -1) {
+        purchases.splice(purchaseIndex, 1);
+    }
+    parent.remove();
+}
+
+
+
+
 function clearContainer() {
    let container = document.getElementById('show-container');
    while (container.children.length > 1) {

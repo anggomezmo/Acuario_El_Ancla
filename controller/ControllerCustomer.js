@@ -157,6 +157,53 @@ function findCustomerByDocument(documentType, documentNumber) {
    return customers.some(customer => customer.documentType === documentType && customer.documentNumber === documentNumber);
 }
 
+//delete customers 
+
+export function deleteCustomers() {
+    if (customers.length == 0) {
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+        document.querySelector('#modal').classList.remove('hidden');
+    } else {
+        let container = document.querySelector('.show-container');
+        clearContainer();
+
+        document.getElementById('entitie-title').textContent = 'CLIENTES';
+        customers.forEach(customer => {
+            let tarjeta = document.createElement('div');
+            let customerNameCard = document.createElement('p');
+            let customerDocument = document.createElement('p');
+            let customerEmail = document.createElement('p');
+            let deleteButton = document.createElement('button');
+
+            tarjeta.classList.add('card');
+            customerNameCard.textContent = `Nombre: ${customer.customerName} ${customer.customerLastName}`;
+            customerDocument.textContent = `Documento: ${customer.documentNumber}`;
+            customerEmail.textContent = `Email: ${customer.customerEmail}`;
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.dataset.customerDocumentNumber = customer.documentNumber;
+            deleteButton.addEventListener('click', detectCardCustomer);
+
+            tarjeta.append(customerNameCard, customerDocument, customerEmail, deleteButton);
+            container.append(tarjeta);
+
+            document.querySelector('#show-container').classList.remove('hidden');
+        });
+    }
+}
+
+function detectCardCustomer(event) {
+    let parent = event.target.parentElement;
+    let documentNumber = event.target.dataset.customerDocumentNumber;
+    let customerIndex = customers.findIndex(customer => customer.documentNumber === documentNumber);
+    if (customerIndex !== -1) {
+        customers.splice(customerIndex, 1);
+    }
+    parent.remove();
+}
+
+
+
 function clearContainer() {
    let container = document.getElementById('show-container');
    while (container.children.length > 1) {

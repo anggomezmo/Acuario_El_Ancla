@@ -165,6 +165,71 @@ function findSupplierById(supplierId) {
    return suppliers.some(supplier => supplier.supplierId === supplierId);
 }
 
+
+
+// DELETE SUPPLIER
+
+export function deleteSuppliers(){
+    // users length comprobation
+ if(suppliers.length==0){
+    document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+    document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+    document.querySelector('#modal').classList.remove('hidden');
+ }
+ else{
+
+    let container = document.querySelector('.show-container')
+    
+    clearContainer();
+
+    document.getElementById('entitie-title').textContent= 'PROVEEDORES'
+    suppliers.forEach(supplier =>{
+       let tarjeta = document.createElement('div')
+       let supplierId  = document.createElement('p')
+       let supplierName = document.createElement('p')
+       let supplierAdress = document.createElement('p')
+       let supplierPhone = document.createElement('p')
+       let supplierEmail = document.createElement('p')
+       let supplierCategory = document.createElement('p')
+       let deleteButton = document.createElement('button');
+
+       tarjeta.classList.add('card');
+       supplierId.textContent = `ID del proveedor: ${supplier.supplierId}`;
+       supplierName.textContent = `Nombre del proveedor: ${supplier.supplierName}`;
+       supplierAdress.textContent = `Dirección del proveedor: ${supplier.supplierAdress}`;
+       supplierPhone.textContent = `Télefono del proveedor: ${supplier.supplierPhone}`;
+       supplierEmail.textContent = `Email del proveedor: ${supplier.supplierEmail}`;
+       supplierCategory.textContent = `Categoria del proveedor: ${supplier.supplierCategory}`;
+       deleteButton.textContent = 'Eliminar';
+       deleteButton.dataset.id = supplier.supplierId; // Guardar el ID del proveedor en el botón
+       deleteButton.addEventListener('click', detectCardSupplier); // Añadir el evento de clic
+
+       tarjeta.append(supplierName, supplierId, supplierAdress, supplierPhone, supplierEmail, supplierCategory, deleteButton);
+       container.append(tarjeta);
+
+       document.querySelector('#show-container').classList.remove('hidden');
+   });
+}
+}
+
+
+
+function detectCardSupplier(event) {
+   let parent = event.target.parentElement;
+   let supplierId = event.target.dataset.id; 
+
+   let supplierIndex = suppliers.findIndex(supplier => supplier.supplierId === supplierId); 
+   if (supplierIndex !== -1) {
+       suppliers.splice(supplierIndex, 1);
+   parent.remove(); 
+   }
+   
+}
+
+
+
+
+
 function clearContainer() {
    let container = document.getElementById('show-container');
    while (container.children.length > 1) {

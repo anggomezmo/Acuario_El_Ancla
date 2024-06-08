@@ -19,6 +19,12 @@ import { addPurchase } from "../controller/ControllerPurchase.js"
 import { addProduct } from "../controller/ControllerProduct.js"
 import { addCustomer } from "../controller/ControllerCustomer.js"
 
+import { deleteUser } from "../controller/ControllerUsers.js"
+import { deleteSuppliers } from "../controller/ControllerSuppliers.js"
+import { deleteSale } from "../controller/ControllerSales.js"
+import { deletePurchases } from "../controller/ControllerPurchase.js"
+import { deleteProducts } from "../controller/ControllerProduct.js"
+import { deleteCustomers } from "../controller/ControllerCustomer.js"
 
 
 // ACTUAL BUTTON PRESSED;
@@ -174,6 +180,41 @@ function addRecord() {
 
     }
 }
+
+
+// add delete functionality 
+document.getElementById('delete-button').addEventListener('click', deleteRecord)
+
+function deleteRecord() {
+    switch (buttonPressed) {
+        case 'users':
+          deleteUser();
+            break
+        case 'suppliers':
+        deleteSuppliers()
+           
+            break
+        case 'sales':
+            deleteSale()
+      
+            break
+        case 'purchases':
+            deletePurchases()
+            break
+        case 'products':
+            deleteProducts()
+            break
+        case 'customers':
+            deleteCustomers()
+        
+            break
+
+    }
+}
+
+
+
+
 
 //MODAL LOGIC
 
