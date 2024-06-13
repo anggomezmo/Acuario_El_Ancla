@@ -1,4 +1,4 @@
-import { changeTitleUser } from "../controller/ControllerUsers.js"
+import { changeTitleUser, editUser } from "../controller/ControllerUsers.js"
 import { changeTitleCustomer } from "../controller/ControllerCustomer.js"
 import { changeTitleSales } from "../controller/ControllerSales.js"
 import { changeTitleProduct } from "../controller/ControllerProduct.js"
@@ -211,7 +211,34 @@ function deleteRecord() {
 
     }
 }
+document.getElementById('edit-button').addEventListener('click', editRecord)
 
+function editRecord() {
+    switch (buttonPressed) {
+        case 'users':
+          editUser();
+            break
+        case 'suppliers':
+        deleteSuppliers()
+           
+            break
+        case 'sales':
+            deleteSale()
+      
+            break
+        case 'purchases':
+            deletePurchases()
+            break
+        case 'products':
+            deleteProducts()
+            break
+        case 'customers':
+            deleteCustomers()
+        
+            break
+
+    }
+}
 
 
 

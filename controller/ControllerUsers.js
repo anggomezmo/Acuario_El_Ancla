@@ -246,7 +246,7 @@ export function deleteUser() {
       clearContainer()
 
       document.getElementById('entitie-title').textContent = 'USUARIOS'
-      users.forEach((user,index) => { // second parameter refers to the index of the actual element
+      users.forEach((user, index) => { // second parameter refers to the index of the actual element
          let tarjeta = document.createElement('div')
          let userNameCard = document.createElement('p')
          let userDocument = document.createElement('p')
@@ -261,25 +261,118 @@ export function deleteUser() {
          deleteButton.textContent = 'Eliminar';
          deleteButton.dataset.documentNumber = user.documentNumber;
          deleteButton.addEventListener('click', detectCardUser);
- 
+
          tarjeta.append(userNameCard, userDocument, userEmail, userRole, deleteButton);
          container.append(tarjeta);
- 
+
          document.querySelector('#show-container').classList.remove('hidden');
-     });
+      });
    }
- }
- 
- function detectCardUser(event) {
-     let parent = event.target.parentElement;
-     let documentNumber = event.target.dataset.documentNumber;
- 
-     let userIndex = users.findIndex(user => user.documentNumber === documentNumber);
-     if (userIndex !== -1) {
-         users.splice(userIndex, 1);
-     }
-     parent.remove();
- }
+}
+
+
+export function editUser() {
+   if (users.length == 0) {
+      document.querySelector('#warning').textContent = 'ENTIDAD VACIA'
+      document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.'
+      document.querySelector('#modal').classList.remove('hidden');
+   }
+   else {
+      let container = document.querySelector('.show-container')
+     
+      clearContainer()
+
+      document.getElementById('entitie-title').textContent = 'USUARIOS'
+      users.forEach((user, index) => { // second parameter refers to the index of the actual element
+
+
+         let tarjeta = document.createElement('div')
+         let userNameCard = document.createElement('p')
+         let userDocument = document.createElement('p')
+         let userEmail = document.createElement('p')
+         let userRole = document.createElement('p')
+         let editButton = document.createElement('button')
+
+
+         tarjeta.dataset.userName = user.userName;
+         tarjeta.dataset.userLastName = user.userLastName;
+         tarjeta.dataset.documentNumber = user.documentNumber;
+         tarjeta.dataset.userEmail = user.userEmail;
+         tarjeta.dataset.userRole = user.userRole;
+
+
+       
+
+
+         tarjeta.classList.add('card');
+         userNameCard.textContent = `Nombre: ${user.userName} ${user.userLastName}`;
+         userDocument.textContent = `Documento: ${user.documentNumber}`;
+         userEmail.textContent = `Email: ${user.userEmail}`;
+         userRole.textContent = `Rol: ${user.userRole}`;
+         editButton.textContent = 'Editar';
+         editButton.dataset.documentNumber = user.documentNumber;
+        
+        
+         editButton.addEventListener('click', () => {
+            becomeInputs(tarjeta)
+         });
+
+         tarjeta.append(userNameCard, userDocument, userEmail, userRole, editButton);
+         container.append(tarjeta);
+
+         document.querySelector('#show-container').classList.remove('hidden');
+      })
+
+   }
+}
+
+
+
+
+
+function becomeInputs(card) {
+   let userNameInput = document.createElement('input');
+   let userDocumentInput = document.createElement('input');
+   let userEmailInput = document.createElement('input');
+   let userRoleInput = document.createElement('input');
+
+   
+   userNameInput.value = `${card.dataset.userName} ${card.dataset.userLastName}`;
+   userDocumentInput.value = card.dataset.documentNumber;
+   userEmailInput.value = card.dataset.userEmail;
+   userRoleInput.value = card.dataset.userRole;
+
+   userNameInput.placeholder ='Nombre'
+   userDocumentInput.placeholder='Numero documento'
+   userEmailInput.placeholder='Correo Electronico'
+   userRoleInput.placeholder= 'Rol'
+
+   card.innerHTML = ''; 
+
+   card.append(userNameInput, userDocumentInput, userEmailInput, userRoleInput);
+
+   let saveButton = document.createElement('button');
+   saveButton.textContent = 'Guardar';
+   card.append(saveButton);
+
+   saveButton.addEventListener('click', () => {
+
+   });
+
+}
+
+
+function detectCardUser(event) {
+   console.log(event)
+   let parent = event.target.parentElement;
+   let documentNumber = event.target.dataset.documentNumber;
+
+   let userIndex = users.findIndex(user => user.documentNumber === documentNumber);
+   if (userIndex !== -1) {
+      users.splice(userIndex, 1);
+   }
+   parent.remove();
+}
 
 
 

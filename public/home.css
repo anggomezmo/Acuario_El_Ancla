@@ -296,6 +296,19 @@ footer {
   border-radius: 5px;
   background: linear-gradient(180deg, rgba(255, 215, 87, 1) 0%, rgba(255, 150, 77, 1) 100%);;
   font-family: "JetBrains Mono", monospace;
+  
+}
+
+.card input{
+box-sizing: border-box;
+margin: 0.8em;
+width: 60%;
+height: 2.5em;
+font-size: 0.9em;
+font-family: "Chewy", system-ui;
+font-weight: 400;
+font-style: normal;
+
 }
 .entitie-title{
   box-sizing: border-box;
