@@ -279,7 +279,7 @@ export function editUser() {
    }
    else {
       let container = document.querySelector('.show-container')
-     
+
       clearContainer()
 
       document.getElementById('entitie-title').textContent = 'USUARIOS'
@@ -293,6 +293,7 @@ export function editUser() {
          let userRole = document.createElement('p')
          let editButton = document.createElement('button')
 
+         tarjeta.dataset.index = index;
 
          tarjeta.dataset.userName = user.userName;
          tarjeta.dataset.userLastName = user.userLastName;
@@ -301,7 +302,7 @@ export function editUser() {
          tarjeta.dataset.userRole = user.userRole;
 
 
-       
+
 
 
          tarjeta.classList.add('card');
@@ -311,8 +312,8 @@ export function editUser() {
          userRole.textContent = `Rol: ${user.userRole}`;
          editButton.textContent = 'Editar';
          editButton.dataset.documentNumber = user.documentNumber;
-        
-        
+
+
          editButton.addEventListener('click', () => {
             becomeInputs(tarjeta)
          });
@@ -331,23 +332,27 @@ export function editUser() {
 
 
 function becomeInputs(card) {
+
+   let index = card.dataset.index;
+   let user = users[index];
+
    let userNameInput = document.createElement('input');
    let userDocumentInput = document.createElement('input');
    let userEmailInput = document.createElement('input');
    let userRoleInput = document.createElement('input');
 
-   
+
    userNameInput.value = `${card.dataset.userName} ${card.dataset.userLastName}`;
    userDocumentInput.value = card.dataset.documentNumber;
    userEmailInput.value = card.dataset.userEmail;
    userRoleInput.value = card.dataset.userRole;
 
-   userNameInput.placeholder ='Nombre'
-   userDocumentInput.placeholder='Numero documento'
-   userEmailInput.placeholder='Correo Electronico'
-   userRoleInput.placeholder= 'Rol'
+   userNameInput.placeholder = 'Nombre'
+   userDocumentInput.placeholder = 'Numero documento'
+   userEmailInput.placeholder = 'Correo Electronico'
+   userRoleInput.placeholder = 'Rol'
 
-   card.innerHTML = ''; 
+   card.innerHTML = '';
 
    card.append(userNameInput, userDocumentInput, userEmailInput, userRoleInput);
 
@@ -357,6 +362,44 @@ function becomeInputs(card) {
 
    saveButton.addEventListener('click', () => {
 
+      let inputs = {
+         user: userNameInput.value.split(' ')[0],
+         userLastName: userNameInput.value.split(' ').slice(1).join(' '),
+         documentNumber: userDocumentInput.value,
+         userEmail: userEmailInput.value,
+         userRole: userRoleInput.value
+      };
+      if (areAllFieldsValid(inputs)) {
+
+
+
+         let nameParts = userNameInput.value.split(' ');
+         user.userName = nameParts.slice(0, -1).join(' ');  //user can type name and lastName
+         user.userLastName = nameParts.slice(-1).join(' ');
+
+         user.documentNumber = userDocumentInput.value;
+         user.userEmail = userEmailInput.value;
+         user.userRole = userRoleInput.value;
+
+         card.innerHTML = '';
+         let userNameCard = document.createElement('p');
+         let userDocument = document.createElement('p');
+         let userEmail = document.createElement('p');
+         let userRole = document.createElement('p');
+         let editButton = document.createElement('button');
+
+         userNameCard.textContent = `Nombre: ${user.userName} ${user.userLastName}`;
+         userDocument.textContent = `Documento: ${user.documentNumber}`;
+         userEmail.textContent = `Email: ${user.userEmail}`;
+         userRole.textContent = `Rol: ${user.userRole}`;
+         editButton.textContent = 'Editar';
+         editButton.dataset.index = index;
+
+         editButton.addEventListener('click', () => { // restart loop of events
+            becomeInputs(card);
+         });
+         card.append(userNameCard, userDocument, userEmail, userRole, editButton);
+      }
    });
 
 }
