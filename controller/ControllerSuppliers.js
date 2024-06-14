@@ -121,9 +121,9 @@ function verifySupplierForm() {
    }
 }
 
-function areAllFieldsValid(inputs, type) {
+function areAllFieldsValid(inputs) {
    for (const input in inputs) {
-       if (!validateInput(input, inputs[input], type)) {
+       if (!validateInput(input, inputs[input])) {
            document.querySelector('#warning').textContent = 'FORMATO INVALIDO';
            document.querySelector('#message').textContent = 'Asegúrese de que los campos estén en un formato válido para poder ingresar el registro.';
            document.querySelector('#modal').classList.remove('hidden');
@@ -131,7 +131,7 @@ function areAllFieldsValid(inputs, type) {
        }
    }
 
-   if (type === 'supplier' && findSupplierById(inputs['supplierId'])) {
+   if (findSupplierById(inputs['supplierId'])) {
        document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE';
        document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.';
        document.querySelector('#modal').classList.remove('hidden');
@@ -141,7 +141,7 @@ function areAllFieldsValid(inputs, type) {
    return true;
 }
 
-function validateInput(input, value, type) {
+function validateInput(input, value) {
    if (!value.trim()) {
        return false;
    }
@@ -211,6 +211,129 @@ export function deleteSuppliers(){
    });
 }
 }
+
+//edit supplier 
+
+export function editSuppliers() {
+    if (suppliers.length == 0) {
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA';
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.';
+        document.querySelector('#modal').classList.remove('hidden');
+    } else {
+        let container = document.querySelector('.show-container');
+        clearContainer();
+
+        document.getElementById('entitie-title').textContent = 'PROVEEDORES';
+        suppliers.forEach((supplier, index) => {
+            let tarjeta = document.createElement('div');
+            let supplierId = document.createElement('p');
+            let supplierName = document.createElement('p');
+            let supplierAdress = document.createElement('p');
+            let supplierPhone = document.createElement('p');
+            let supplierEmail = document.createElement('p');
+            let supplierCategory = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            tarjeta.classList.add('card');
+            supplierId.textContent = `ID del proveedor: ${supplier.supplierId}`;
+            supplierName.textContent = `Nombre del proveedor: ${supplier.supplierName}`;
+            supplierAdress.textContent = `Dirección del proveedor: ${supplier.supplierAdress}`;
+            supplierPhone.textContent = `Télefono del proveedor: ${supplier.supplierPhone}`;
+            supplierEmail.textContent = `Email del proveedor: ${supplier.supplierEmail}`;
+            supplierCategory.textContent = `Categoria del proveedor: ${supplier.supplierCategory}`;
+            editButton.textContent = 'Editar';
+            editButton.dataset.index = index;
+            tarjeta.dataset.index=index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(tarjeta);
+            });
+
+            tarjeta.append(supplierId, supplierName, supplierAdress, supplierPhone, supplierEmail, supplierCategory, editButton);
+            container.append(tarjeta);
+
+            document.querySelector('#show-container').classList.remove('hidden');
+        });
+    }
+}
+
+function becomeInputs(card) {
+    let index = card.dataset.index;
+    console.log(index)
+    let supplier = suppliers[index];
+
+    let supplierNameInput = document.createElement('input');
+    let supplierAdressInput = document.createElement('input');
+    let supplierPhoneInput = document.createElement('input');
+    let supplierEmailInput = document.createElement('input');
+    let supplierCategoryInput = document.createElement('input');
+
+    supplierNameInput.placeholder = "Nombre del proveedor";
+    supplierAdressInput.placeholder = "Dirección del proveedor";
+    supplierPhoneInput.placeholder = "Télefono del proveedor";
+    supplierEmailInput.placeholder = "Email del proveedor";
+    supplierCategoryInput.placeholder = "Categoria del proveedor";
+                                        
+    supplierNameInput.value = supplier.supplierName;
+    supplierAdressInput.value = supplier.supplierAdress;
+    supplierPhoneInput.value = supplier.supplierPhone;
+    supplierEmailInput.value = supplier.supplierEmail;
+    supplierCategoryInput.value = supplier.supplierCategory;
+
+    card.innerHTML = ''; 
+
+    card.append(supplierNameInput, supplierAdressInput, supplierPhoneInput, supplierEmailInput, supplierCategoryInput);
+
+    let saveButton = document.createElement('button');
+    saveButton.textContent = 'Guardar';
+    card.append(saveButton);
+
+    saveButton.addEventListener('click', () => {
+       
+        let inputs = {
+            supplierName: supplierNameInput.value,
+            supplierAdress: supplierAdressInput.value,
+            supplierPhone: supplierPhoneInput.value,
+            supplierEmail: supplierEmailInput.value,
+            supplierCategory: supplierCategoryInput.value
+        };
+
+        if (areAllFieldsValid(inputs)) {
+
+            supplier.supplierName = inputs.supplierName;
+            supplier.supplierAdress = inputs.supplierAdress;
+            supplier.supplierPhone = inputs.supplierPhone;
+            supplier.supplierEmail = inputs.supplierEmail;
+            supplier.supplierCategory = inputs.supplierCategory;
+
+
+            card.innerHTML = '';
+            let supplierId = document.createElement('p');
+            let supplierName = document.createElement('p');
+            let supplierAdress = document.createElement('p');
+            let supplierPhone = document.createElement('p');
+            let supplierEmail = document.createElement('p');
+            let supplierCategory = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            supplierId.textContent = `ID del proveedor: ${supplier.supplierId}`;
+            supplierName.textContent = `Nombre del proveedor: ${supplier.supplierName}`;
+            supplierAdress.textContent = `Dirección del proveedor: ${supplier.supplierAdress}`;
+            supplierPhone.textContent = `Télefono del proveedor: ${supplier.supplierPhone}`;
+            supplierEmail.textContent = `Email del proveedor: ${supplier.supplierEmail}`;
+            supplierCategory.textContent = `Categoria del proveedor: ${supplier.supplierCategory}`;
+            editButton.textContent = 'Editar';
+            editButton.dataset.index = index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(card);
+            });
+
+            card.append(supplierId, supplierName, supplierAdress, supplierPhone, supplierEmail, supplierCategory, editButton);
+        }
+    });
+}
+
 
 
 

@@ -114,9 +114,9 @@ function verifyCustomerForm() {
    }
 }
 
-function areAllFieldsValid(inputs, type) {
+function areAllFieldsValid(inputs) {
    for (const input in inputs) {
-       if (!validateInput(input, inputs[input], type)) {
+       if (!validateInput(input, inputs[input] )) {
            document.querySelector('#warning').textContent = 'FORMATO INVALIDO';
            document.querySelector('#message').textContent = 'Asegúrese de que los campos estén en un formato válido para poder ingresar el registro.';
            document.querySelector('#modal').classList.remove('hidden');
@@ -124,7 +124,7 @@ function areAllFieldsValid(inputs, type) {
        }
    }
 
-   if (type === 'customer' && findCustomerByDocument(inputs['documentType'], inputs['documentNumber'])) {
+   if ( findCustomerByDocument(inputs['documentType'], inputs['documentNumber'])) {
        document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE';
        document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.';
        document.querySelector('#modal').classList.remove('hidden');
@@ -134,7 +134,7 @@ function areAllFieldsValid(inputs, type) {
    return true;
 }
 
-function validateInput(input, value, type) {
+function validateInput(input, value) {
    if (!value.trim()) {
        return false;
    }
@@ -190,6 +190,105 @@ export function deleteCustomers() {
             document.querySelector('#show-container').classList.remove('hidden');
         });
     }
+}
+//edit customer
+
+export function editCustomer() {
+    if (customers.length == 0) {
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA';
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.';
+        document.querySelector('#modal').classList.remove('hidden');
+    } else {
+        let container = document.querySelector('.show-container');
+        clearContainer();
+
+        document.getElementById('entitie-title').textContent = 'CLIENTES';
+        customers.forEach((customer, index) => {
+            let tarjeta = document.createElement('div');
+            let customerNameCard = document.createElement('p');
+            let customerDocument = document.createElement('p');
+            let customerEmail = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            tarjeta.classList.add('card');
+            customerNameCard.textContent = `Nombre: ${customer.customerName} ${customer.customerLastName}`;
+            customerDocument.textContent = `Documento: ${customer.documentNumber}`;
+            customerEmail.textContent = `Email: ${customer.customerEmail}`;
+            editButton.textContent = 'Editar';
+            tarjeta.dataset.index = index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(tarjeta);
+            });
+
+            tarjeta.append(customerNameCard, customerDocument, customerEmail, editButton);
+            container.append(tarjeta);
+
+            document.querySelector('#show-container').classList.remove('hidden');
+        });
+    }
+}
+
+function becomeInputs(card) {
+    let index = card.dataset.index;
+    let customer = customers[index];
+
+    let customerNameInput = document.createElement('input');
+    let customerLastNameInput = document.createElement('input');
+    let customerDocumentInput = document.createElement('input');
+    let customerEmailInput = document.createElement('input');
+
+    customerNameInput.placeholder = "Nombre";
+    customerLastNameInput.placeholder = "Apellido";
+    customerDocumentInput.placeholder = "Documento";
+    customerEmailInput.placeholder = "Email";
+
+    customerNameInput.value = customer.customerName;
+    customerLastNameInput.value = customer.customerLastName;
+    customerDocumentInput.value = customer.documentNumber;
+    customerEmailInput.value = customer.customerEmail;
+
+    card.innerHTML = '';
+
+    card.append(customerNameInput, customerLastNameInput, customerDocumentInput, customerEmailInput);
+
+    let saveButton = document.createElement('button');
+    saveButton.textContent = 'Guardar';
+    card.append(saveButton);
+
+    saveButton.addEventListener('click', () => {
+        let inputs = {
+            customerName: customerNameInput.value,
+            customerLastName: customerLastNameInput.value,
+            documentNumber: customerDocumentInput.value,
+            customerEmail: customerEmailInput.value
+        };
+
+        if (areAllFieldsValid(inputs)) {
+            customer.customerName = inputs.customerName;
+            customer.customerLastName = inputs.customerLastName;
+            customer.documentNumber = inputs.documentNumber;
+            customer.customerEmail = inputs.customerEmail;
+
+            card.innerHTML = '';
+            let customerNameCard = document.createElement('p');
+            let customerDocument = document.createElement('p');
+            let customerEmail = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            customerNameCard.textContent = `Nombre: ${customer.customerName} ${customer.customerLastName}`;
+            customerDocument.textContent = `Documento: ${customer.documentNumber}`;
+            customerEmail.textContent = `Email: ${customer.customerEmail}`;
+            editButton.textContent = 'Editar';
+            editButton.dataset.index = index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(card);
+            });
+
+            card.append(customerNameCard, customerDocument, customerEmail, editButton);
+        }
+    });
 }
 
 function detectCardCustomer(event) {

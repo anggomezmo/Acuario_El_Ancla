@@ -185,7 +185,7 @@ function areAllFieldsValid(inputs) {
          return false;
       }
    }
-   console.log(console.log(findUserRegisterForm(inputs['user'])))
+   
    if (findUserRegisterForm(inputs['user'])) {
       document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE'
       document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.'

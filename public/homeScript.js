@@ -26,7 +26,11 @@ import { deletePurchases } from "../controller/ControllerPurchase.js"
 import { deleteProducts } from "../controller/ControllerProduct.js"
 import { deleteCustomers } from "../controller/ControllerCustomer.js"
 
-
+import { editSuppliers } from "../controller/ControllerSuppliers.js"
+import { editSale } from "../controller/ControllerSales.js"
+import { editPurchase } from "../controller/ControllerPurchase.js"
+import { editProduct } from "../controller/ControllerProduct.js"
+import { editCustomer } from "../controller/ControllerCustomer.js"
 // ACTUAL BUTTON PRESSED;
 let buttonPressed
 
@@ -219,21 +223,21 @@ function editRecord() {
           editUser();
             break
         case 'suppliers':
-        deleteSuppliers()
+        editSuppliers()
            
             break
         case 'sales':
-            deleteSale()
+            editSale()
       
             break
         case 'purchases':
-            deletePurchases()
+            editPurchase()
             break
         case 'products':
-            deleteProducts()
+            editProduct()
             break
         case 'customers':
-            deleteCustomers()
+            editCustomer()
         
             break
 

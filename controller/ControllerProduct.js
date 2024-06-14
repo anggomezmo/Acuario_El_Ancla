@@ -130,9 +130,9 @@ function verifyProductForm() {
     }
 }
 
-function areAllFieldsValid(inputs, type) {
+function areAllFieldsValid(inputs) {
     for (const input in inputs) {
-        if (!validateInput(input, inputs[input], type)) {
+        if (!validateInput(input, inputs[input])) {
             document.querySelector('#warning').textContent = 'FORMATO INVALIDO';
             document.querySelector('#message').textContent = 'Asegúrese de que los campos estén en un formato válido para poder ingresar el registro.';
             document.querySelector('#modal').classList.remove('hidden');
@@ -140,7 +140,7 @@ function areAllFieldsValid(inputs, type) {
         }
     }
 
-    if (type === 'product' && findProductById(inputs['productId'])) {
+    if (findProductById(inputs['productId'])) {
         document.querySelector('#warning').textContent = 'REGISTRO YA EXISTENTE';
         document.querySelector('#message').textContent = 'Este registro ya existe en la base de datos.';
         document.querySelector('#modal').classList.remove('hidden');
@@ -150,7 +150,7 @@ function areAllFieldsValid(inputs, type) {
     return true;
 }
 
-function validateInput(input, value, type) {
+function validateInput(input, value) {
     if (!value.trim()) {
         return false;
     }
@@ -218,6 +218,131 @@ export function deleteProducts() {
         });
     }
 }
+
+export function editProduct() {
+    if (products.length == 0) {
+        document.querySelector('#warning').textContent = 'ENTIDAD VACIA';
+        document.querySelector('#message').textContent = 'La operación no se puede realizar. Agregue un registro primero.';
+        document.querySelector('#modal').classList.remove('hidden');
+    } else {
+        let container = document.querySelector('.show-container');
+        clearContainer();
+
+        document.getElementById('entitie-title').textContent = 'PRODUCTOS';
+        products.forEach((product, index) => {
+            let tarjeta = document.createElement('div');
+            let productId = document.createElement('p');
+            let productName = document.createElement('p');
+            let productDescription = document.createElement('p');
+            let productType = document.createElement('p');
+            let productSellPrice = document.createElement('p');
+            let productBuyPrice = document.createElement('p');
+            let productAvailable = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            tarjeta.classList.add('card');
+            productId.textContent = `ID de producto: ${product.productId}`;
+            productName.textContent = `Nombre del producto: ${product.productName}`;
+            productDescription.textContent = `Descripción del producto: ${product.productDescription}`;
+            productType.textContent = `Tipo de producto: ${product.productType}`;
+            productSellPrice.textContent = `Precio de venta: ${product.productSellPrice}`;
+            productBuyPrice.textContent = `Precio de compra: ${product.productBuyPrice}`;
+            productAvailable.textContent = `Unidades disponibles: ${product.productAvailable}`;
+            editButton.textContent = 'Editar';
+            tarjeta.dataset.index = index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(tarjeta);
+            });
+
+            tarjeta.append(productId, productName, productDescription, productType, productSellPrice, productBuyPrice, productAvailable, editButton);
+            container.append(tarjeta);
+
+            document.querySelector('#show-container').classList.remove('hidden');
+        });
+    }
+}
+
+function becomeInputs(card) {
+    let index = card.dataset.index;
+    let product = products[index];
+
+    let productNameInput = document.createElement('input');
+    let productDescriptionInput = document.createElement('input');
+    let productTypeInput = document.createElement('input');
+    let productSellPriceInput = document.createElement('input');
+    let productBuyPriceInput = document.createElement('input');
+    let productAvailableInput = document.createElement('input');
+
+    productNameInput.placeholder = "Nombre del producto";
+    productDescriptionInput.placeholder = "Descripción del producto";
+    productTypeInput.placeholder = "Tipo de producto";
+    productSellPriceInput.placeholder = "Precio de venta";
+    productBuyPriceInput.placeholder = "Precio de compra";
+    productAvailableInput.placeholder = "Unidades disponibles";
+
+    productNameInput.value = product.productName;
+    productDescriptionInput.value = product.productDescription;
+    productTypeInput.value = product.productType;
+    productSellPriceInput.value = product.productSellPrice;
+    productBuyPriceInput.value = product.productBuyPrice;
+    productAvailableInput.value = product.productAvailable;
+
+    card.innerHTML = '';
+
+    card.append(productNameInput, productDescriptionInput, productTypeInput, productSellPriceInput, productBuyPriceInput, productAvailableInput);
+
+    let saveButton = document.createElement('button');
+    saveButton.textContent = 'Guardar';
+    card.append(saveButton);
+
+    saveButton.addEventListener('click', () => {
+        let inputs = {
+            productName: productNameInput.value,
+            productDescription: productDescriptionInput.value,
+            productType: productTypeInput.value,
+            productSellPrice: productSellPriceInput.value,
+            productBuyPrice: productBuyPriceInput.value,
+            productAvailable: productAvailableInput.value
+        };
+
+        if (areAllFieldsValid(inputs)) {
+            product.productName = inputs.productName;
+            product.productDescription = inputs.productDescription;
+            product.productType = inputs.productType;
+            product.productSellPrice = inputs.productSellPrice;
+            product.productBuyPrice = inputs.productBuyPrice;
+            product.productAvailable = inputs.productAvailable;
+
+            card.innerHTML = '';
+            let productId = document.createElement('p');
+            let productName = document.createElement('p');
+            let productDescription = document.createElement('p');
+            let productType = document.createElement('p');
+            let productSellPrice = document.createElement('p');
+            let productBuyPrice = document.createElement('p');
+            let productAvailable = document.createElement('p');
+            let editButton = document.createElement('button');
+
+            productId.textContent = `ID de producto: ${product.productId}`;
+            productName.textContent = `Nombre del producto: ${product.productName}`;
+            productDescription.textContent = `Descripción del producto: ${product.productDescription}`;
+            productType.textContent = `Tipo de producto: ${product.productType}`;
+            productSellPrice.textContent = `Precio de venta: ${product.productSellPrice}`;
+            productBuyPrice.textContent = `Precio de compra: ${product.productBuyPrice}`;
+            productAvailable.textContent = `Unidades disponibles: ${product.productAvailable}`;
+            editButton.textContent = 'Editar';
+            editButton.dataset.index = index;
+
+            editButton.addEventListener('click', () => {
+                becomeInputs(card);
+            });
+
+            card.append(productId, productName, productDescription, productType, productSellPrice, productBuyPrice, productAvailable, editButton);
+        }
+    });
+}
+
 
 function detectCardProduct(event) {
     let parent = event.target.parentElement;
